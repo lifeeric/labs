@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddExpenses.ts should be true 1`] = `
+Object {
+  "data": Object {
+    "addExpenses": Object {
+      "__typename": "GetExpensesResult",
+      "date": "1598759076174",
+      "description": "bought exposed",
+      "name": "daraz",
+      "price": 212,
+    },
+  },
+}
+`;

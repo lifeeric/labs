@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForgotPass testing should get the data 1`] = `
+Object {
+  "data": Object {
+    "forgotPassword": Object {
+      "__typename": "ForgetPassordResult",
+      "email": "alex@test.com",
+      "id": "5f449b73e2ccbc43aa520488",
+    },
+  },
+}
+`;

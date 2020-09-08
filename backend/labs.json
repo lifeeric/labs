@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5f4490fcab78f73c094c8a11"},"name":"alex","email":"test@test.com","password":"$2a$12$O88IDSFqZC77DU5UDy4xqOZkE3Bsa1.Ys.o12UcASKG.7DRoh2e9q","createdAt":{"$date":"2020-08-25T04:18:04.783Z"},"updatedAt":{"$date":"2020-08-25T04:18:04.783Z"},"__v":0}
+{"_id":{"$oid":"5f449b73e2ccbc43aa520488"},"name":"alex","email":"alex@test.com","password":"$2a$12$6ioly/j1g1PSe8Ot9nSCouw9h2nlU1isIZX9BjJI1R.sgfRPYlGq2","createdAt":{"$date":"2020-08-25T05:02:43.85Z"},"updatedAt":{"$date":"2020-08-26T10:36:38.238Z"},"__v":0}

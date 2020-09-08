@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports.ts should be true when adding data 1`] = `
+Object {
+  "data": Object {
+    "addReport": Object {
+      "__typename": "getReportResult",
+      "date": "2020-08-30T03:44:36.174Z",
+      "patient_age": 18,
+      "patient_id": 123,
+      "patient_name": "alex",
+      "patient_referedby": "dr",
+      "patient_sex": "Male",
+      "price": 323,
+    },
+  },
+}
+`;

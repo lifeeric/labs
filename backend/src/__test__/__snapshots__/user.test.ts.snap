@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User.ts Should create user 1`] = `
+Object {
+  "data": Object {
+    "createUser": Object {
+      "__typename": "Error",
+      "error": true,
+      "message": "user already exists!",
+    },
+  },
+}
+`;

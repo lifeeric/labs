@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Getting login user should retrieves the user data 1`] = `
+Object {
+  "data": Object {
+    "login": Object {
+      "__typename": "LoginUserResult",
+      "email": "alex@test.com",
+    },
+  },
+}
+`;

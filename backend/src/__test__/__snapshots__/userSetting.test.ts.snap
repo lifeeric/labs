@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserSettings.ts should fetch data 1`] = `
+Object {
+  "data": Object {
+    "userSetting": Object {
+      "__typename": "GetUserSettingResult",
+      "company": null,
+      "email": "alex@test.com",
+      "name": "alex",
+      "refered": Array [],
+    },
+  },
+}
+`;
