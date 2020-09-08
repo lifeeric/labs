@@ -1,0 +1,28 @@
+@import "../../../UI/Theme/variables";
+
+.service {
+  // Card
+  &__card {
+    width: 356px;
+    height: auto;
+    box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+    color: $text--black;
+  }
+
+  // image
+  &__image {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .service {
+    &__card {
+      width: 100% !important;
+      margin: 20px 0px;
+    }
+  }
+}

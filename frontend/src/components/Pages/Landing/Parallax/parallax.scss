@@ -1,0 +1,14 @@
+@import "../../../UI/Theme/variables";
+
+.parallax {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  flex-direction: column;
+  box-shadow: 5px 10px 20px #000;
+
+  & h1 {
+    color: $primary;
+  }
+}

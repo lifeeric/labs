@@ -1,0 +1,102 @@
+@import "../../../UI/Theme/variables";
+
+.landing {
+  width: 100%;
+
+  // container
+  &__container {
+    max-width: 1366px;
+    padding: 60px 80px;
+    margin: 0 auto;
+  }
+
+  // background image
+  &__bgimage {
+    background: url(../../../../images/backgroundhome.svg) right no-repeat;
+    width: 100%;
+    height: 1000px;
+    z-index: -1;
+    position: absolute;
+    right: 0;
+    top: -90px;
+
+    &:before {
+      content: "";
+      background: $bg--sky;
+      width: 10%;
+      right: 0;
+      height: 100%;
+
+      position: absolute;
+    }
+  }
+
+  // content
+  &__content {
+    font-family: "poppins", sans-serif;
+    color: $text--black;
+  }
+
+  // title
+  &__title {
+    font-size: 80px;
+    font-weight: 900;
+  }
+
+  &__explain {
+    margin-top: -20px;
+    margin-bottom: 40px;
+  }
+
+  // lab image
+  &__labimage {
+    width: 400px;
+    margin-left: 150px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .landing {
+    // lab image
+    &__labimage {
+      margin: auto !important;
+    }
+
+    // background iamge
+    &__bgimage {
+      &:before {
+        content: "";
+        background: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .landing {
+    // container
+    &__container {
+      padding: 50px 20px;
+    }
+
+    // background image
+    &__bgimage {
+      top: -100px;
+    }
+
+    // title
+    &__title {
+      font-size: 50px;
+    }
+
+    // explain
+    &__content {
+      width: 100% !important;
+    }
+
+    // lab image
+    &__labimage {
+      width: 97%;
+    }
+  }
+}

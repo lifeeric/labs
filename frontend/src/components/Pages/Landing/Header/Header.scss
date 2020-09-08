@@ -1,0 +1,17 @@
+@import "../../../UI/Theme/variables";
+
+.header {
+  font-family: "poppins", sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+
+  // logo
+  &__logo {
+    font-size: 35px;
+    text-decoration: none;
+    font-weight: 800;
+    color: $text--black;
+  }
+}

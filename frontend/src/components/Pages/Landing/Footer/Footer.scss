@@ -1,0 +1,95 @@
+@import "../../../UI/Theme/variables";
+
+.footer {
+  width: 100%;
+  background: $primary;
+
+  // container
+  &__container {
+    max-width: 13366px;
+    padding: 50px 90px;
+  }
+
+  // about
+  &__about {
+    padding-right: 15px;
+  }
+
+  // rows
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  // cols
+  &__cols {
+    flex: 0 0 15%;
+    max-width: 15%;
+  }
+
+  // cols
+  &__cols:nth-child(1) {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  // links
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__link a {
+    text-decoration: none;
+    color: $color--footer-links;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+
+  // divider
+  &__divider {
+    border-top: 1px solid $divider;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    color: $text--white;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1130px) {
+  .footer {
+    // container
+    &__container {
+      padding: 50px 20px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    // about
+    &__about {
+      width: 100% !important;
+    }
+
+    // row
+    &__row {
+      justify-content: center;
+      text-align: center;
+    }
+    // cols
+    &__cols {
+      flex: 1 0 100% !important;
+      max-width: 100% !important;
+      margin-top: 20px;
+    }
+  }
+}

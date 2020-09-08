@@ -1,0 +1,39 @@
+@import "../../../../UI/Theme/variables";
+
+.nav {
+  // item
+  &__item {
+    display: inline;
+    margin-right: 33px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  // link
+  &__link {
+    text-decoration: none;
+    color: $text--black;
+    transition: 0.5s;
+    cursor: pointer;
+
+    // hover
+    &:hover {
+      color: $primary;
+    }
+  }
+  &__link.active {
+    color: $primary;
+  }
+}
+
+@media (max-width: 850px) {
+  .nav {
+    // item
+    &__item {
+      display: block;
+      margin-top: 15px;
+    }
+  }
+}

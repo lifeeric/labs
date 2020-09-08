@@ -1,0 +1,80 @@
+@import "../../../UI/Theme/variables";
+
+.about {
+  page-break-after: always;
+  background: $bg--about;
+  position: relative;
+  width: 100% !important;
+
+  // container
+  &__container {
+    padding: 100px 40px 40px;
+    max-width: 1366px !important;
+    margin: auto;
+  }
+
+  // banner
+  &__banner {
+    margin-right: 150px;
+    text-align: right;
+  }
+
+  // Title
+  &__title {
+    font-size: 25px;
+    color: $text--black;
+  }
+
+  // About
+  &__explain {
+    color: $text--black;
+    max-width: 537px;
+    text-justify: justify;
+    margin: 40px 0;
+  }
+
+  // Curve
+  &__curve {
+    background: url(../../../../images/Vector.svg) bottom no-repeat;
+    width: 100%;
+    height: 240px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 1100px) {
+  .about {
+    // banner
+    &__banner {
+      margin: 50px auto 0;
+      text-align: center;
+    }
+
+    // explain
+    &__explain {
+      text-align: center !important;
+      margin: 50px auto;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .about {
+    &__container {
+      padding: 50px 20px;
+    }
+
+    // color
+    &__color {
+      width: 100%;
+    }
+
+    &__banner > svg {
+      width: 100%;
+    }
+  }
+}

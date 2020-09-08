@@ -1,0 +1,53 @@
+@import "../../UI/Theme/variables";
+
+.login {
+  width: 100%;
+  box-sizing: border-box;
+
+  // greeting
+  &__greeting {
+    text-align: center;
+    color: $text--black;
+  }
+
+  // container
+  &__container {
+    max-width: 900px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    color: $text--black;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // tab
+  &__tab {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    & .react-tabs__tab--selected {
+      color: $primary;
+    }
+  }
+
+  // forgot password
+  &__forgot {
+    margin-top: 20px;
+
+    // a
+    & > a {
+      color: $text--black;
+    }
+  }
+
+  // banner, right
+  &__right > div {
+    height: 100% !important;
+  }
+}

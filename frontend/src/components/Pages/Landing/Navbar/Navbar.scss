@@ -1,0 +1,62 @@
+@import "../../../UI/Theme/variables";
+
+.nav {
+  // nav
+  &__nav {
+    margin-left: 100px;
+    width: 100%;
+  }
+
+  // list
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // right
+  &--right {
+    float: right;
+    margin-top: -5px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+@media (max-width: 850px) {
+  .nav {
+    // open sidedrawer
+    &--open {
+      transform: translateX(0);
+    }
+
+    &--close {
+      transform: translateX(100%);
+    }
+
+    // for mobile version
+    &--mobile {
+      position: fixed;
+      box-sizing: border-box;
+      top: 0;
+      right: 0;
+      width: 300px;
+      max-width: 70%;
+      padding: 90px 100px;
+      background-color: $text--white;
+      height: 100%;
+      transition: transform 0.5s ease;
+      z-index: 1;
+      text-align: center;
+    }
+
+    // logins
+    &--right {
+      float: initial;
+
+      .item--button {
+        margin-left: -25px;
+      }
+    }
+  }
+}

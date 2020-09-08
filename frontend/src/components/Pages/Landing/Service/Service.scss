@@ -1,0 +1,27 @@
+@import "../../../UI/Theme/variables";
+
+.service {
+  width: 100%;
+
+  // container
+  &__container {
+    max-width: 1366px;
+    padding: 100px 40px;
+    margin: auto;
+  }
+
+  // title
+  &__title {
+    text-align: center;
+    color: $text--black;
+    margin-bottom: 100px;
+  }
+
+  // wrapper
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

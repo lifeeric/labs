@@ -1,0 +1,25 @@
+@import "../../UI/Theme/variables";
+
+.login {
+  // textfield
+  &__textfield {
+    margin-bottom: 35px;
+  }
+
+  // label
+  &__textfield label {
+    display: block;
+  }
+
+  // input
+  &__input {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 25px;
+    background: $primary--light;
+    padding: 8px 16px;
+    font-size: 18px;
+    outline: none;
+    border: transparent;
+  }
+}
