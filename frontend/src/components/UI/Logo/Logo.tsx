@@ -1,10 +1,21 @@
 import * as React from "react"
-import { useState } from "react"
+import styled from "styled-components"
 
 interface Props {}
 
-export const Logo: React.FC<Props> = ({}) => {
-  const [state, setState] = useState<boolean | undefined>(undefined)
+/**
+ * Styled components
+ */
 
-  return <h1> Logo Component </h1>
+const LogoComp = styled.div`
+  color: #4a5bbf;
+  padding-left: 25px;
+`
+
+export const Logo: React.FC<Props> = () => {
+  return (
+    <LogoComp>
+      <h1> BIO </h1>
+    </LogoComp>
+  )
 }

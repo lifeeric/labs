@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@animated-burgers/burger-slip@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@animated-burgers/burger-slip/-/burger-slip-1.1.2.tgz#4a16a4744a7f39f65886707094f70ce646d7a140"
+  integrity sha512-gm63/GrqHOv/wMYECx+Sag3uYm/STFaaAMaRGOFzxFYoHV+TZERVrj4RYUE9YIdsagxdEj18KVmCwXO7WHoG2w==
+  dependencies:
+    "@animated-burgers/burger" "^1.1.2"
+
+"@animated-burgers/burger@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@animated-burgers/burger/-/burger-1.1.2.tgz#a75f7147f9d4041b8bfd510e0097a1500c4fa009"
+  integrity sha512-hErU9dlOcEeYbmbhhngBMXSDtqOaXfFEnKoodfs6vCFWD8dVLMNVbFFpZ0eV7/Wa9kKTGLPeLtDeP0vWYAcY7w==
+
 "@apollo/client@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.1.4.tgz#2848a9f29619275df9af55966c4f5984e31cea6e"
@@ -7392,6 +7404,11 @@ gzip-size@3.0.0:
   integrity sha1-VGGI6b3DN/Zzdy+BZgRks4nc5SA=
   dependencies:
     duplexer "^0.1.1"
+
+hamburger-react@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.2.0.tgz#71494756710a4f63699acbce899657d87c3f1f3a"
+  integrity sha512-7bRKPseNk2K1Upg4kP/yDcg28/wUCnGBVp1699qkyktCi2WjxQEaru9DKGZaqDJJYZzqdyLvLc9oHz3rBXm3PQ==
 
 handle-thing@^2.0.0:
   version "2.0.1"
