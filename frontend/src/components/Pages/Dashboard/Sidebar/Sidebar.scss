@@ -7,57 +7,53 @@
   width: 260px;
   left: 0;
   color: $text--black;
+  background: $pure--white;
 
-  // list
-  &__list {
-    margin: 50px 0 0;
-    padding: 0;
-    overflow: hidden;
-    list-style: none;
+  // small nav
+  &__smallnav > .burger {
+    display: none;
   }
 
-  // item
-  &__item {
-    padding: 8px 0 8px 25px;
-    display: flex;
-    align-items: center;
-  }
-
-  // svg, icon
-  &__item > svg {
-    font-size: 1.7em;
-    padding-right: 10px;
-    transition: 0.4s ease-out;
-  }
-
-  // hover over
-  &__item:hover,
-  &__item:hover &__link,
-  &__item.active,
-  &__item.active &__link {
-    color: $secondary;
-    cursor: pointer;
-  }
-
-  &__item.active {
-    font-weight: 600;
-  }
-
-  // link
-  &__link {
-    text-decoration: none;
-    color: $text--black;
-  }
-
-  // bottom, help
-  &__bottom {
-    position: absolute;
-    bottom: 10px;
+  // search hidding
+  &__search {
+    display: none !important;
   }
 }
 
 @media (max-width: 1024px) {
   .sidebar {
-    transform: translateX(-100%);
+    width: 60px;
+
+    // small nav
+    &__smallnav {
+      // burger
+      & > .burger {
+        display: block;
+        margin: 15px 10px;
+      }
+      // logo
+      & > div {
+        display: none;
+      }
+    }
+
+    // opening sidebar
+    &.sidebar__open {
+      width: 240px;
+      z-index: 2;
+      border: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 0;
+    border: none;
+
+    &__search {
+      display: block !important;
+      border-top: 1px solid $light--border;
+    }
   }
 }

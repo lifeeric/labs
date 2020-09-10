@@ -1,0 +1,36 @@
+.lists {
+  margin: 17px;
+  overflow-x: auto;
+
+  // table
+  &__table {
+    min-width: 800px;
+  }
+
+  // row
+  &__row {
+    height: 48px;
+  }
+
+  // date
+  &__date {
+  }
+
+  // title
+  &__title {
+    padding-left: 30px;
+  }
+
+  // description
+  &__description {
+    padding-left: 40px;
+  }
+
+  // actions
+  &__action {
+    font-size: 1.5em;
+    position: absolute;
+    right: 27px;
+    cursor: pointer;
+  }
+}

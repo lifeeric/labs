@@ -2,12 +2,10 @@ import * as React from "react"
 
 import "./MainContent.scss"
 
-interface Props {}
+interface Props {
+  children: JSX.Element | JSX.Element[]
+}
 
-export const MainContent: React.FC<Props> = () => {
-  return (
-    <div className="content">
-      <h1> MainContent Component </h1>
-    </div>
-  )
+export const MainContent: React.FC<Props> = ({ children }) => {
+  return <div className="content">{children}</div>
 }

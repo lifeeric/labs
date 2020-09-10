@@ -1,5 +1,5 @@
 import * as React from "react"
 
-import Index from "../components/Pages/Dashboard/"
+import { Dashboard } from "../components/Pages/Dashboard/"
 
-export default () => <Index />
+export default () => <Dashboard />

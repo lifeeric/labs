@@ -2,16 +2,22 @@ import * as React from "react"
 import styled from "styled-components"
 import { RiSearchLine } from "react-icons/ri"
 
-interface Props {}
+interface Props {
+  width?: string
+}
+
+interface StyleProps {
+  width: string | undefined
+}
 
 /**
  * Styled Components
  */
 
-const SearchComp = styled.div`
+const SearchComp = styled.div<StyleProps>`
   display: flex;
   width: 100%;
-  max-width: 252px;
+  max-width: ${({ width }) => (width ? width : "252px")};
   background-color: #f6f7fb;
   padding: 8px 12px;
   border-radius: 25px;
@@ -27,9 +33,9 @@ const Input = styled.input`
   padding-left: 4px;
 `
 
-export const Search: React.FC<Props> = () => {
+export const Search: React.FC<Props> = ({ width }) => {
   return (
-    <SearchComp title="if you didn't find something, search here">
+    <SearchComp width={width} title="if you didn't find something, search here">
       <RiSearchLine />
       <Input type="text" className="search__input" placeholder="Search..." />
     </SearchComp>

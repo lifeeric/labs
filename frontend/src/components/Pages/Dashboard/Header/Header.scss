@@ -62,14 +62,17 @@
 
 @media (max-width: 1024px) {
   .topbar {
-    margin-left: 0;
+    margin-left: 60px;
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 600px) {
   .topbar {
+    margin-left: 0;
+    
     &__search {
       visibility: hidden;
+      width: 10px
     }
   }
 }
