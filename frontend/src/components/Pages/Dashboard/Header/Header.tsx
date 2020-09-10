@@ -1,6 +1,10 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { FiSend } from "react-icons/fi"
+import { Search } from "../Search/Search"
+
+import "./Header.scss"
 
 export const Header: React.FC = () => {
   /**
@@ -12,7 +16,7 @@ export const Header: React.FC = () => {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
-          fixed(width: 125, height: 125) {
+          fixed(width: 150, height: 100) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -21,15 +25,18 @@ export const Header: React.FC = () => {
   `)
 
   return (
-    <header className="header">
-      <div className="header__container">
-        <div className="header__wrapper">
-          <div className="header__search">
-            <input type="text" placeholder="Search..." />
+    <header className="topbar">
+      <div className="topbar__container">
+        <div className="topbar__wrapper">
+          <div className="topbar__search">
+            <Search />
           </div>
-          <div className="header__profile">
-            <div className="header__invite"></div>
-            <div className="header__image">
+          <div className="topbar__profile">
+            <div className="topbar__invite" title="Invite your friends">
+              <FiSend />
+              Invite
+            </div>
+            <div className="topbar__image">
               <Img fixed={file.childImageSharp.fixed} />
             </div>
           </div>
