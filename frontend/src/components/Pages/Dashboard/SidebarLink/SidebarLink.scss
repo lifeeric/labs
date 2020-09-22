@@ -93,9 +93,17 @@
 }
 
 @media (max-width: 600px) {
+  .sidebar__bottom {
+    position: relative;
+    bottom: 0;
+  }
+}
+
+@media (orientation: landscape) {
   .sidebar {
     &__bottom {
-      display: none;
+      position: relative;
+      bottom: 0;
     }
   }
 }

@@ -21,6 +21,13 @@
     padding: 0 20px;
   }
 
+  // search
+  &__search {
+    & > div:last-child {
+      display: none;
+    }
+  }
+
   // profile
   &__profile {
     display: flex;
@@ -69,10 +76,14 @@
 @media (max-width: 600px) {
   .topbar {
     margin-left: 0;
-    
+
     &__search {
-      visibility: hidden;
-      width: 10px
+      & > div:first-child {
+        display: none;
+      }
+      & > div:last-child {
+        display: block;
+      }
     }
   }
 }

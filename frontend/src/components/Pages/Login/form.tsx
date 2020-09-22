@@ -2,6 +2,7 @@ import * as React from "react"
 import { useForm } from "react-hook-form"
 import { ButtonComp as Button } from "../../UI/Button/Button"
 import { Input } from "./Input"
+import { gql, useLazyQuery } from "@apollo/client"
 
 import "./form.scss"
 
@@ -9,9 +10,37 @@ type Props = {
   formData: any
 }
 
+/**
+ * GraphQL Query
+ */
+const LOGIN_QUERY = gql`
+  {
+    login(email: "alex@test.com", password: "alex") {
+      __typename
+      ... on LoginUserResult {
+        _id
+        email
+        token
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
 export const Form: React.FC<Props> = ({ formData }) => {
+  // useQuery
+  const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY)
+
   const { register, handleSubmit, watch } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = (fdata: any) => {
+    console.log(fdata)
+    getLogin()
+    console.log(data, ' Apollo')
+  }
 
   console.log(watch("example"))
   // watch input value by passing the name of it

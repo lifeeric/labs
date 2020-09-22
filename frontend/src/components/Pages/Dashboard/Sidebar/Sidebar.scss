@@ -4,6 +4,8 @@
   height: 100vh;
   border-right: 1px solid $light--border;
   position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 260px;
   left: 0;
   color: $text--black;
@@ -48,9 +50,10 @@
 
 @media (max-width: 600px) {
   .sidebar {
-    width: 0;
+    width: 0px;
     border: none;
 
+    // search bar
     &__search {
       display: block !important;
       border-top: 1px solid $light--border;

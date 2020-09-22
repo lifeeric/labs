@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useContext } from "react"
 import { useState } from "react"
 import { MdDashboard } from "react-icons/md"
 import { MdNoteAdd } from "react-icons/md"
@@ -14,17 +15,13 @@ import "./Sidebar.scss"
 import { BackdropComp } from "../../../UI/Backdrop/Backdrop"
 import { SidebarLink } from "../SidebarLink/SidebarLink"
 import { Search } from "../Search/Search"
+import { LocalContext } from "../../../../utils/authorized"
 
 interface Props {}
 
 export const Sidebar: React.FC<Props> = () => {
-  // Humber
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { sidebar, toggleSidebar } = useContext(LocalContext)
 
-  // clicking
-  const clickMeDown = (): void => {
-    setIsOpen((isOpen: boolean) => !isOpen)
-  }
 
   /**
    * links data
@@ -71,10 +68,10 @@ export const Sidebar: React.FC<Props> = () => {
 
   return (
     <>
-      <div className={`sidebar ${isOpen && `sidebar__open`}`}>
+      <div className={`sidebar ${sidebar && `sidebar__open`}`}>
         <div className="sidebar__smallnav">
           <Logo />
-          <HumBurger isOpen={isOpen} clickMeDown={clickMeDown} />
+          <HumBurger isOpen={sidebar} clickMeDown={toggleSidebar} />
         </div>
 
         <ul className="sidebar__list">
@@ -89,7 +86,7 @@ export const Sidebar: React.FC<Props> = () => {
       </div>
 
       {/** Backdrop */}
-      <BackdropComp isTrue={isOpen} onClick={clickMeDown} />
+      <BackdropComp isTrue={sidebar} onClick={toggleSidebar} />
     </>
   )
 }

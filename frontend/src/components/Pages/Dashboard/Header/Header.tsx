@@ -1,12 +1,16 @@
 import * as React from "react"
+import { useContext } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { FiSend } from "react-icons/fi"
 import { Search } from "../Search/Search"
-
+import { HumBurger } from "../Burger/Burger"
+import { LocalContext } from "../../../../utils/authorized"
 import "./Header.scss"
 
 export const Header: React.FC = () => {
+  const { sidebar, toggleSidebar } = useContext(LocalContext)
+
   /**
    * Image
    */
@@ -30,6 +34,7 @@ export const Header: React.FC = () => {
         <div className="topbar__wrapper">
           <div className="topbar__search">
             <Search />
+            <HumBurger isOpen={sidebar} clickMeDown={toggleSidebar} />
           </div>
           <div className="topbar__profile">
             <div className="topbar__invite" title="Invite your friends">
