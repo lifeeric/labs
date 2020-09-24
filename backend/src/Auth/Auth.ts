@@ -9,7 +9,7 @@ const privateKey = fs.readFileSync(
 
 export default (request: any, key = privateKey) => {
   const header = request.req.headers.authorization;
-
+console.log(header, ' Header')
   // header not found
   if (!header)
     return {

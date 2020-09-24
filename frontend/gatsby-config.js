@@ -28,12 +28,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-apollo",
-      options: {
-        uri: "http://localhost:8001/graphql",
-      },
-    },
-    {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {

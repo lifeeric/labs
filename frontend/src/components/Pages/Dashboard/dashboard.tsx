@@ -1,8 +1,7 @@
 import * as React from "react"
-import { useContext } from "react"
 import { Header } from "./Header/Header"
 import { Sidebar } from "./Sidebar/Sidebar"
-import { MainContent } from "./MainContent/MainContent"
+import { MainContent } from "../../UI/MainContent/MainContent"
 
 export default () => {
   return (

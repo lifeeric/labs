@@ -1,6 +1,4 @@
 import * as React from "react"
-import { useContext } from "react"
-import { useState } from "react"
 import { MdDashboard } from "react-icons/md"
 import { MdNoteAdd } from "react-icons/md"
 import { RiFileUserFill } from "react-icons/ri"
@@ -8,20 +6,19 @@ import { SiGoogleanalytics } from "react-icons/si"
 import { FaRegMoneyBillAlt } from "react-icons/fa"
 import { MdSettings } from "react-icons/md"
 import { MdHelp } from "react-icons/md"
-
 import { Logo } from "../../../UI/Logo/Logo"
 import { HumBurger } from "../Burger/Burger"
-import "./Sidebar.scss"
 import { BackdropComp } from "../../../UI/Backdrop/Backdrop"
 import { SidebarLink } from "../SidebarLink/SidebarLink"
 import { Search } from "../Search/Search"
-import { LocalContext } from "../../../../utils/authorized"
+import { customHook, toggleSidebar } from "../../../../utils/customHook"
+
+import "./Sidebar.scss"
 
 interface Props {}
 
 export const Sidebar: React.FC<Props> = () => {
-  const { sidebar, toggleSidebar } = useContext(LocalContext)
-
+  const sidebar = customHook()
 
   /**
    * links data
@@ -68,10 +65,10 @@ export const Sidebar: React.FC<Props> = () => {
 
   return (
     <>
-      <div className={`sidebar ${sidebar && `sidebar__open`}`}>
+      <div className={`sidebar ${sidebar.sidebar && `sidebar__open`}`}>
         <div className="sidebar__smallnav">
           <Logo />
-          <HumBurger isOpen={sidebar} clickMeDown={toggleSidebar} />
+          <HumBurger isOpen={sidebar.sidebar} clickMeDown={toggleSidebar} />
         </div>
 
         <ul className="sidebar__list">
@@ -86,7 +83,7 @@ export const Sidebar: React.FC<Props> = () => {
       </div>
 
       {/** Backdrop */}
-      <BackdropComp isTrue={sidebar} onClick={toggleSidebar} />
+      <BackdropComp isTrue={sidebar.sidebar} onClick={toggleSidebar} />
     </>
   )
 }

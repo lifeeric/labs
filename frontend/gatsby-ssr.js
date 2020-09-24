@@ -5,11 +5,36 @@
  */
 
 // You can delete this file if you're not using it
-import * as React from "react"
+import React from "react"
+import { ApolloProvider, ApolloClient, createHttpLink } from "@apollo/client"
+import { setContext } from "@apollo/client/link/context"
+import { cache, stateVar } from "./src/utils/cache"
+import fetch from "isomorphic-fetch"
 
-import { LocalProvider } from "./src/utils/authorized.tsx"
-const wrapRootElement = ({ element }) => (
-  <LocalProvider>{element}</LocalProvider>
+const httpLink = createHttpLink({
+  uri: "http://localhost:3000/graphql",
+})
+
+const authLink = setContext((_, { headers }) => {
+  const {
+    currentUser: { token },
+  } = stateVar()
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  }
+})
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache,
+  connectToDevTools: true,
+  fetch,
+})
+
+export const wrapRootElement = ({ element }) => (
+  <ApolloProvider client={client}>{element}</ApolloProvider>
 )
-
-export { wrapRootElement }

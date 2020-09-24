@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Header } from "../Dashboard/Header/Header"
 import { Sidebar } from "../Dashboard/Sidebar/Sidebar"
-import { MainContent } from "../Dashboard/MainContent/MainContent"
+import { MainContent } from "../../UI/MainContent/MainContent"
 import { SubHeader } from "./SubHeader/SubHeader"
 import { Box } from "./Box/Box"
 

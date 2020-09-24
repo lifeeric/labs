@@ -1,0 +1,19 @@
+@import "../../UI/Theme/variables";
+
+.warning {
+  background: $color--warning;
+  padding: 4px 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.warning strong {
+  color: $color--warning-text;
+}
+
+.warning.success {
+  background: $color--success;
+}
+.warning.success strong {
+  color: $color--success-text;
+}

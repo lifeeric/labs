@@ -1,8 +1,14 @@
 import * as React from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { ButtonComp as Button } from "../../UI/Button/Button"
 import { Input } from "./Input"
 import { gql, useLazyQuery } from "@apollo/client"
+import { useLocalStorage } from "../../../utils/localStorage"
+import { Warning } from "../../UI/Warning/Warning"
+import { login } from "../../../utils/customHook"
+// import { navigate } from "gatsby"
+import { navigate } from "@reach/router"
 
 import "./form.scss"
 
@@ -14,8 +20,8 @@ type Props = {
  * GraphQL Query
  */
 const LOGIN_QUERY = gql`
-  {
-    login(email: "alex@test.com", password: "alex") {
+  query LOGIN($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       __typename
       ... on LoginUserResult {
         _id
@@ -32,18 +38,25 @@ const LOGIN_QUERY = gql`
 `
 
 export const Form: React.FC<Props> = ({ formData }) => {
-  // useQuery
+  const [getUser, setUser] = useLocalStorage()
   const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY)
+  const [loginStatus, setLoginStatus] = useState<any>()
+
+  useEffect(() => {
+    if (data) {
+      setLoginStatus(data.login)
+      login(data.login)
+      if (data.login.__typename === "LoginUserResult") {
+        setUser({ name: "", email: data.login.email, token: data.login.token }),
+          navigate("/dashboard")
+      }
+    }
+  }, [data])
 
   const { register, handleSubmit, watch } = useForm()
-  const onSubmit = (fdata: any) => {
-    console.log(fdata)
-    getLogin()
-    console.log(data, ' Apollo')
+  const onSubmit = (fdata: any): void => {
+    getLogin({ variables: { email: fdata.Email, password: fdata.Password } })
   }
-
-  console.log(watch("example"))
-  // watch input value by passing the name of it
 
   return (
     <>
@@ -53,6 +66,13 @@ export const Form: React.FC<Props> = ({ formData }) => {
         {formData.map((ld: any) => (
           <Input key={ld.label} register={register} {...ld} />
         ))}
+
+        {loginStatus && (
+          <Warning
+            message={String(loginStatus?.message)}
+            log={loginStatus.error}
+          />
+        )}
 
         <Button btnType={true} type="primary" width="100px">
           Login

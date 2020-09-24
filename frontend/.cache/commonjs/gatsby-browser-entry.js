@@ -37,7 +37,7 @@ var _loader = _interopRequireDefault(require("./loader"));
 const prefetchPathname = _loader.default.enqueue;
 exports.prefetchPathname = prefetchPathname;
 
-const StaticQueryContext = _react.default.createContext({});
+const StaticQueryContext = /*#__PURE__*/_react.default.createContext({});
 
 exports.StaticQueryContext = StaticQueryContext;
 
