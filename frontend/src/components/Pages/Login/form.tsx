@@ -3,7 +3,8 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { ButtonComp as Button } from "../../UI/Button/Button"
 import { Input } from "./Input"
-import { gql, useLazyQuery } from "@apollo/client"
+import { useLazyQuery } from "@apollo/client"
+import { LOGIN_QUERY } from "../../../utils/gql"
 import { useLocalStorage } from "../../../utils/localStorage"
 import { Warning } from "../../UI/Warning/Warning"
 import { login } from "../../../utils/customHook"
@@ -14,27 +15,6 @@ import "./form.scss"
 type Props = {
   formData: any
 }
-
-/**
- * GraphQL Query
- */
-const LOGIN_QUERY = gql`
-  query LOGIN($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      __typename
-      ... on LoginUserResult {
-        _id
-        email
-        token
-      }
-
-      ... on Error {
-        error
-        message
-      }
-    }
-  }
-`
 
 export const Form: React.FC<Props> = ({ formData }) => {
   const [getUser, setUser] = useLocalStorage()

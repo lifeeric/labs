@@ -1,21 +1,20 @@
+@import "../Theme/variables";
+
 @import "../../UI/Theme/variables";
 
-.login {
-  // textfield
-  &__textfield {
-    margin-bottom: 35px;
-    max-width: 400px;
-  }
+.textarea {
+  margin-bottom: 35px;
+  max-width: 400px !important;
 
   // label
-  &__textfield label {
+  & label {
     display: block;
     margin-bottom: 10px;
   }
 
   // input
-  &__input {
-    width: 100%;
+  & textarea {
+    width: 100% !important;
     border-radius: 25px;
     background: $primary--light;
     padding: 8px 16px;

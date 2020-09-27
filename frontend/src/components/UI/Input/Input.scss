@@ -1,0 +1,23 @@
+@import "../Theme/variables";
+
+.textfield {
+  margin-bottom: 35px;
+  max-width: 400px;
+
+  // label
+  & label {
+    display: block;
+  }
+
+  // input
+  &__input {
+    width: 100%;
+    border-radius: 25px;
+    background: $primary--light;
+    font-size: 18px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    outline: none;
+    border: transparent;
+  }
+}
