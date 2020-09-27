@@ -4,13 +4,13 @@ import styled from "styled-components"
 interface Props {
   children: string
   width: string
-  type: string
+  type?: string
   shadow?: boolean
   btnType?: boolean
 }
 
 interface StyleProps {
-  primary: string
+  primary: any
   width: string
   shadow?: boolean
   type?: any

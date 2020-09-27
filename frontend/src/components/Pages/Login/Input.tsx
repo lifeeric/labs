@@ -24,7 +24,7 @@ export const Input: React.FC<Inputs> = ({
         className="login__input"
         type={type}
         placeholder={placeholder}
-        ref={register({ required: required })}
+        ref={register && register({ required: required })}
         name={label}
       />
     </div>

@@ -7,8 +7,7 @@ import { gql, useLazyQuery } from "@apollo/client"
 import { useLocalStorage } from "../../../utils/localStorage"
 import { Warning } from "../../UI/Warning/Warning"
 import { login } from "../../../utils/customHook"
-// import { navigate } from "gatsby"
-import { navigate } from "@reach/router"
+import { navigate } from "gatsby"
 
 import "./form.scss"
 
@@ -41,19 +40,24 @@ export const Form: React.FC<Props> = ({ formData }) => {
   const [getUser, setUser] = useLocalStorage()
   const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY)
   const [loginStatus, setLoginStatus] = useState<any>()
+  const { register, handleSubmit, watch } = useForm()
 
   useEffect(() => {
     if (data) {
       setLoginStatus(data.login)
       login(data.login)
       if (data.login.__typename === "LoginUserResult") {
-        setUser({ name: "", email: data.login.email, token: data.login.token }),
-          navigate("/dashboard")
+        setUser({
+          _id: data.login._id,
+          name: "",
+          email: data.login.email,
+          token: data.login.token,
+        })
+        navigate("/dashboard")
       }
     }
   }, [data])
 
-  const { register, handleSubmit, watch } = useForm()
   const onSubmit = (fdata: any): void => {
     getLogin({ variables: { email: fdata.Email, password: fdata.Password } })
   }

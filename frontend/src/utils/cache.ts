@@ -20,17 +20,18 @@ export const stateVar = makeVar({
   currentUser: {
     _id: "",
     email: "",
+    name: "",
     token: "",
   },
 })
 
 const defaultUser = () => {
   const [getUser] = useLocalStorage()
-console.log(getUser())
+  console.log(getUser())
   stateVar({
     ...stateVar(),
     currentUser: getUser(),
   })
 }
 defaultUser()
-console.log(stateVar(), ' from cach.ts')
+console.log(stateVar(), " from cach.ts")

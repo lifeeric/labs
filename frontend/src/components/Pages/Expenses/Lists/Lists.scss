@@ -15,51 +15,14 @@
     position: relative;
   }
 
-  // date
-  &__date {
-  }
-
-  // title
-  &__title {
-    padding-left: 30px;
-  }
-
-  // description
-  &__description {
-    padding-left: 40px;
-  }
-
   // actions
   &__action {
     font-size: 1.5em;
     position: absolute;
     line-height: 52px;
-    right: 27px;
+    right: 37px;
     cursor: pointer;
     z-index: 1;
-
-    // &:active &:after {
-    //   content: "";
-    //   position: absolute;
-    //   top: 5.5px;
-    //   left: -2px;
-    //   background: $light--black;
-    //   border-radius: 80%;
-    //   width: 30px;
-    //   height: 30px;
-    //   z-index: -1;
-    // }
-  }
-
-  &__action:active &__action:after {
-    content: "";
-    position: absolute;
-    top: 5.5px;
-    left: -2px;
-    background: $light--black;
-    border-radius: 80%;
-    width: 30px;
-    height: 30px;
-    z-index: -1;
+    border-radius: 20px;
   }
 }

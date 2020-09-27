@@ -1,0 +1,39 @@
+@import "../../UI/Theme/variables";
+
+.model {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  max-width: 500px;
+  margin: 5% auto;
+  z-index: 10;
+  padding: 10px;
+
+  &__container {
+    border-radius: 4px;
+    padding: 20px;
+    background: $text--white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  &__price {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: $white--light;
+  }
+
+  &__body {
+    margin-top: 30px;
+  }
+
+  &__action {
+    float: right;
+    margin-top: 20px;
+  }
+}
