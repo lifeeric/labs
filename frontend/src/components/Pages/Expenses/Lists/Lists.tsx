@@ -21,15 +21,19 @@ export const Lists: React.FC<Props> = React.memo(() => {
   const [dataModel, setDataModel] = useState<any>(null)
 
   if (error) return <p>Error</p>
-  let renderingData = <ItemLoading />
+  let renderingData: any = <ItemLoading />
 
   console.log(data, " Re-rendering LIsts.tsx")
   if (data)
-    renderingData = data.getExpenses.map((item: any) => (
+    renderingData = [...data.getExpenses].reverse().map((item: any) => (
       <tr className="lists__row" key={item.id}>
         <Item {...item} openModelHandler={() => openModelHandler(item)} />
       </tr>
     ))
+
+  if (data && data.getExpenses.length <= 0) {
+    renderingData = <p>Seem you don't have enough data yet!</p>
+  }
 
   const openModelHandler = <T extends any>(data: T): void => {
     setIsModel(true)

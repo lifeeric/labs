@@ -16,10 +16,10 @@ export const Textarea: React.FC<Props> = ({
     <div className="textarea">
       <label htmlFor="textarea-des">{children}</label>
       <textarea
-        value=""
         placeholder={placeholder}
         id="textarea-des"
         ref={register({ required: true })}
+        name="textareades"
       ></textarea>
     </div>
   )

@@ -6,6 +6,9 @@ import styled from "styled-components"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { Textarea } from "../../../UI/Textarea/Textarea"
 import { useForm } from "react-hook-form"
+import { ADD_NEW_EXPENSES, GET_EXPENSES_LIST } from "../../../../utils/gql"
+import { useMutation, useQuery } from "@apollo/client"
+import { customHook } from "../../../../utils/customHook"
 
 interface Props {
   closeModelHandler: () => void
@@ -36,7 +39,9 @@ export const AddExpenses: React.FC<Props> = ({
   isModel,
 }) => {
   const { handleSubmit, register, errors } = useForm()
-  const onSubmit = (values: any) => console.log(values)
+  const [addExpense, { data, loading }] = useMutation(ADD_NEW_EXPENSES)
+  // const { data } = useQuery(GET_EXPENSES_LIST)
+  const { currentUser } = customHook()
 
   const inputs: Array<Iinput> = [
     {
@@ -60,6 +65,21 @@ export const AddExpenses: React.FC<Props> = ({
     },
   ]
 
+  console.log(data)
+
+  const onSubmit = (values: any): void => {
+    console.log(typeof values.Price)
+    addExpense({
+      variables: {
+        id: currentUser._id,
+        name: values.Title,
+        price: Number(values.Price),
+        description: values.textareades,
+        date: values.Date,
+      },
+    })
+  }
+
   return (
     <Model isOpen={isModel} closeModel={closeModelHandler}>
       <Center>
@@ -82,6 +102,7 @@ export const AddExpenses: React.FC<Props> = ({
           </Left>
         </form>
       </Center>
+      <p>{JSON.stringify(data, null, 2)}</p>
     </Model>
   )
 }

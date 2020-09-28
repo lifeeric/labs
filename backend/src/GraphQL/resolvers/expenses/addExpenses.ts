@@ -43,6 +43,7 @@ export default {
     return {
       __typename: "GetExpensesResult",
       ...result._doc,
+      id: result.id,
     };
   },
 };
