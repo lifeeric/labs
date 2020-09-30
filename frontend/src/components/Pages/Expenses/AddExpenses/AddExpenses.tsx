@@ -11,6 +11,7 @@ import { ADD_NEW_EXPENSES, GET_EXPENSES_LIST } from "../../../../utils/gql"
 import { useMutation } from "@apollo/client"
 import { customHook } from "../../../../utils/customHook"
 import { VscLoading } from "react-icons/vsc"
+import { Snackbar } from "../../../UI/Snackbar/Snackbar"
 
 interface Props {
   closeModelHandler: () => void
@@ -56,6 +57,7 @@ export const AddExpenses: React.FC<Props> = ({
   const { handleSubmit, register, errors } = useForm()
   const { currentUser } = customHook()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [snackbar, setSnackbar] = useState<boolean>(false)
   const [addExpense, { data, loading }] = useMutation(ADD_NEW_EXPENSES, {
     refetchQueries: [
       {
@@ -65,8 +67,16 @@ export const AddExpenses: React.FC<Props> = ({
     ],
   })
 
+  const openSnackbarHandler = (): void => setSnackbar(true)
+  const closeSnackbarHandler = (): void => setSnackbar(false)
+
   useEffect(() => {
     data && closeModelHandler()
+    data && openSnackbarHandler()
+    data &&
+      setTimeout(() => {
+        closeSnackbarHandler()
+      }, 5010)
     return () => {}
   }, [data])
 
@@ -105,27 +115,34 @@ export const AddExpenses: React.FC<Props> = ({
   }
 
   return (
-    <Model isOpen={isModel} closeModel={closeModelHandler}>
-      <Center>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {inputs.map((int: Iinput) => (
-            <Input key={int.label} {...int} />
-          ))}
+    <>
+      <Model isOpen={isModel} closeModel={closeModelHandler}>
+        <Center>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {inputs.map((int: Iinput) => (
+              <Input key={int.label} {...int} />
+            ))}
 
-          <Textarea
-            register={register}
-            placeholder="the old thing was pretty bad so I had to change it"
-          >
-            Description
-          </Textarea>
-          <Left>
-            <SimpleButton onClick={closeModelHandler} />
-            <Button width="100px" btnType={true}>
-              {loading ? <Spinning /> : "Add"}
-            </Button>
-          </Left>
-        </form>
-      </Center>
-    </Model>
+            <Textarea
+              register={register}
+              placeholder="the old thing was pretty bad so I had to change it"
+            >
+              Description
+            </Textarea>
+            <Left>
+              <SimpleButton onClick={closeModelHandler} />
+              <Button width="100px" btnType={true}>
+                {loading ? <Spinning /> : "Add"}
+              </Button>
+            </Left>
+          </form>
+        </Center>
+      </Model>
+      <Snackbar
+        state={snackbar}
+        text="Item Successfully added!"
+        closeSnackbar={closeSnackbarHandler}
+      />
+    </>
   )
 }

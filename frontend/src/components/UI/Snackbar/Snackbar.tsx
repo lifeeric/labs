@@ -1,11 +1,12 @@
 import * as React from "react"
-import { useState } from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { MdClose } from "react-icons/md"
 import Ripples from "react-ripples"
 
 interface Props {
   text: string
+  closeSnackbar: () => void
+  state: boolean
 }
 
 interface StyleProps {
@@ -41,23 +42,43 @@ const Close = styled.span`
   font-size: 20px;
 `
 
-export const Snackbar: React.FC<Props> = ({ text }) => {
-  const [state, setState] = useState<boolean>(true)
-
-  const closeSnackbarHandler = (): void => {
-    setState(false)
-  }
-
-  if (!state) return null
-
-  return (
-    <SnackBarComp type={"success"}>
-      {text}
-      <Close>
-        <Ripples>
-          <MdClose onClick={closeSnackbarHandler} />
-        </Ripples>
-      </Close>
-    </SnackBarComp>
-  )
+const countdown = keyframes`
+from {
+transform: translateX(0);
 }
+to {
+transform: translateX(-100%);
+}
+`
+const BottomLine = styled.span`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: black;
+  animation: ${countdown} 5s linear;
+`
+
+const propsAreEqual = (prevProps: any, nextProps: any) => {
+  return prevProps.state === nextProps.state
+}
+
+export const Snackbar: React.FC<Props> = React.memo(
+  ({ state, text, closeSnackbar }) => {
+    if (!state) return null
+
+    return (
+      <SnackBarComp type={"success"}>
+        {text}
+        <Close>
+          <Ripples>
+            <MdClose onClick={closeSnackbar} />
+          </Ripples>
+        </Close>
+        <BottomLine />
+      </SnackBarComp>
+    )
+  },
+  propsAreEqual
+)

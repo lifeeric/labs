@@ -71,3 +71,20 @@ export const ADD_NEW_EXPENSES = gql`
     }
   }
 `
+
+export const GET_USER_SETTING = gql`
+  query USER_SETTING($id: ID!) {
+    userSetting(id: $id) {
+      __typename
+      ... on GetUserSettingResult {
+        name
+        email
+        company
+      }
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
