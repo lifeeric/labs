@@ -9,6 +9,9 @@ interface Props {
   description: string
   price: string
 }
+const propsAreEqual = (prevProps: any, nextProps: any) => {
+  return prevProps.id === nextProps.id && prevProps.date === nextProps.date
+}
 
 export const Item: React.FC<Props> = React.memo(
   ({ date, name, description, price, openModelHandler }) => {
@@ -26,5 +29,6 @@ export const Item: React.FC<Props> = React.memo(
         </td>
       </>
     )
-  }
+  },
+  propsAreEqual
 )

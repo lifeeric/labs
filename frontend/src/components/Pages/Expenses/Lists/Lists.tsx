@@ -16,6 +16,7 @@ export const Lists: React.FC<Props> = React.memo(() => {
   const { currentUser } = customHook()
   const { data, loading, error } = useQuery(GET_EXPENSES_LIST, {
     variables: { id: currentUser._id },
+    fetchPolicy: "network-only",
   })
   const [isModel, setIsModel] = useState<boolean>(false)
   const [dataModel, setDataModel] = useState<any>(null)
@@ -23,7 +24,6 @@ export const Lists: React.FC<Props> = React.memo(() => {
   if (error) return <p>Error</p>
   let renderingData: any = <ItemLoading />
 
-  console.log(data, " Re-rendering LIsts.tsx")
   if (data)
     renderingData = [...data.getExpenses].reverse().map((item: any) => (
       <tr className="lists__row" key={item.id}>

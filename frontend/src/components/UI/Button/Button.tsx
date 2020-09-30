@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 
 interface Props {
-  children: string
+  children: string | JSX.Element
   width: string
   type?: string
   shadow?: boolean

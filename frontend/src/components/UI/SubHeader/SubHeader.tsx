@@ -2,9 +2,12 @@ import * as React from "react"
 import { useState } from "react"
 import { MdAddCircle } from "react-icons/md"
 import styled from "styled-components"
-import { AddExpenses } from "../AddExpenses/AddExpenses"
+import { AddExpenses } from "../../Pages/Expenses/AddExpenses/AddExpenses"
 
-interface Props {}
+interface Props {
+  leftHeader: JSX.Element | string
+  rightHeader?: JSX.Element | string
+}
 
 /**
  * Styled components
@@ -24,7 +27,7 @@ const Icon = styled(MdAddCircle)`
   color: #4a5bbf;
 `
 
-export const SubHeader: React.FC<Props> = () => {
+export const SubHeader: React.FC<Props> = ({ leftHeader, rightHeader }) => {
   const [isModel, setIsModel] = useState<boolean>(false)
 
   const closeModelHandler = (): void => {
@@ -38,10 +41,12 @@ export const SubHeader: React.FC<Props> = () => {
   return (
     <>
       <Header>
-        <h3 className="subheader__title">All Expenses</h3>
-        <div className="subheader__add" title="Add expenses">
-          <Icon onClick={openModelHandler} />
-        </div>
+        <h3 className="subheader__title">{leftHeader}</h3>
+        {rightHeader && (
+          <div className="subheader__add" title="Add expenses">
+            <Icon onClick={openModelHandler} />
+          </div>
+        )}
       </Header>
 
       <AddExpenses closeModelHandler={closeModelHandler} isModel={isModel} />

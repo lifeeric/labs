@@ -31,17 +31,17 @@ export const Sidebar: React.FC<Props> = () => {
       clx: "",
     },
     {
-      to: "",
+      to: "/addreport",
       text: "Add Report",
       icon: <MdNoteAdd />,
     },
     {
-      to: "",
+      to: "/patientdata",
       text: "Patient data",
       icon: <RiFileUserFill />,
     },
     {
-      to: "",
+      to: "/analytics",
       text: "Analytics",
       icon: <SiGoogleanalytics />,
     },
@@ -51,7 +51,7 @@ export const Sidebar: React.FC<Props> = () => {
       icon: <FaRegMoneyBillAlt />,
     },
     {
-      to: "",
+      to: "/setting",
       text: "Setting",
       icon: <MdSettings />,
     },

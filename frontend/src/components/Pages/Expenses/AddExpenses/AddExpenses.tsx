@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState, useEffect } from "react"
 import { Model } from "../../../UI/Model/Model"
 import { Input } from "../../Login/Input"
 import { SimpleButton } from "../../../UI/SimpleButton/SimpleButton"
@@ -7,8 +8,9 @@ import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { Textarea } from "../../../UI/Textarea/Textarea"
 import { useForm } from "react-hook-form"
 import { ADD_NEW_EXPENSES, GET_EXPENSES_LIST } from "../../../../utils/gql"
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import { customHook } from "../../../../utils/customHook"
+import { VscLoading } from "react-icons/vsc"
 
 interface Props {
   closeModelHandler: () => void
@@ -34,14 +36,39 @@ const Left = styled.div`
   justify-content: flex-end;
 `
 
+const Spinning = styled(VscLoading)`
+  animation: icon-spin 2s infinite linear;
+
+  @keyframes icon-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+`
+
 export const AddExpenses: React.FC<Props> = ({
   closeModelHandler,
   isModel,
 }) => {
   const { handleSubmit, register, errors } = useForm()
-  const [addExpense, { data, loading }] = useMutation(ADD_NEW_EXPENSES)
-  // const { data } = useQuery(GET_EXPENSES_LIST)
   const { currentUser } = customHook()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [addExpense, { data, loading }] = useMutation(ADD_NEW_EXPENSES, {
+    refetchQueries: [
+      {
+        query: GET_EXPENSES_LIST,
+        variables: { id: currentUser._id },
+      },
+    ],
+  })
+
+  useEffect(() => {
+    data && closeModelHandler()
+    return () => {}
+  }, [data])
 
   const inputs: Array<Iinput> = [
     {
@@ -65,10 +92,7 @@ export const AddExpenses: React.FC<Props> = ({
     },
   ]
 
-  console.log(data)
-
-  const onSubmit = (values: any): void => {
-    console.log(typeof values.Price)
+  const onSubmit = async (values: any) => {
     addExpense({
       variables: {
         id: currentUser._id,
@@ -97,12 +121,11 @@ export const AddExpenses: React.FC<Props> = ({
           <Left>
             <SimpleButton onClick={closeModelHandler} />
             <Button width="100px" btnType={true}>
-              Add
+              {loading ? <Spinning /> : "Add"}
             </Button>
           </Left>
         </form>
       </Center>
-      <p>{JSON.stringify(data, null, 2)}</p>
     </Model>
   )
 }
