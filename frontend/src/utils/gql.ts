@@ -88,3 +88,22 @@ export const GET_USER_SETTING = gql`
     }
   }
 `
+
+export const UPDATE_PASSWD = gql`
+  mutation(
+    $id: ID!
+    $oldPassword: String!
+    $newPassword: String!
+    $newPasswordAgain: String!
+  ) {
+    updatePassword(
+      id: $id
+      oldPassword: $oldPassword
+      newPassword: $newPassword
+      newPasswordAgain: $newPasswordAgain
+    ) {
+      error
+      message
+    }
+  }
+`

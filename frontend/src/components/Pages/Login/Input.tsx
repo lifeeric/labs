@@ -8,6 +8,7 @@ type Inputs = {
   register?: any
   required?: boolean
   type?: string
+  value?: string
 }
 
 export const Input: React.FC<Inputs> = ({
@@ -16,6 +17,7 @@ export const Input: React.FC<Inputs> = ({
   register,
   type = "input",
   required = false,
+  value,
 }) => {
   return (
     <div className="login__textfield">
@@ -23,6 +25,7 @@ export const Input: React.FC<Inputs> = ({
       <input
         className="login__input"
         type={type}
+        defaultValue={value}
         placeholder={placeholder}
         ref={register && register({ required: required })}
         name={label}

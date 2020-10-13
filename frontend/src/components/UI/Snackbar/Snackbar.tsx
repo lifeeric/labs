@@ -6,7 +6,8 @@ import Ripples from "react-ripples"
 interface Props {
   text: string
   closeSnackbar: () => void
-  state: boolean
+  state?: string
+  isOpen: boolean
 }
 
 interface StyleProps {
@@ -22,7 +23,8 @@ const SnackBarComp = styled.div<StyleProps>`
   bottom: 15px;
   left: 15px;
   min-width: 295px;
-  background: ${({ type }) => (type === "success" ? "#4caf50" : "#323232")};
+  background: ${({ type }) =>
+    type === "success" ? "#4caf50" : type === "danger" ? "#F4443E" : "#323232"};
   color: #ffff;
   padding: 14px 16px;
   border-radius: 3px;
@@ -61,15 +63,16 @@ const BottomLine = styled.span`
 `
 
 const propsAreEqual = (prevProps: any, nextProps: any) => {
-  return prevProps.state === nextProps.state
+  return prevProps.isOpen === nextProps.isOpen
 }
 
 export const Snackbar: React.FC<Props> = React.memo(
-  ({ state, text, closeSnackbar }) => {
-    if (!state) return null
+  ({ state, isOpen, text, closeSnackbar }) => {
+    if (!isOpen) return null
+    console.log(state, isOpen, " Snackbar ->")
 
     return (
-      <SnackBarComp type={"success"}>
+      <SnackBarComp type={state}>
         {text}
         <Close>
           <Ripples>

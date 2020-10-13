@@ -46,12 +46,12 @@ export const Login: React.FC = () => {
   const registerUser = [
     {
       label: "Full Name",
-      placeholder: "Murad Ali",
+      placeholder: "Alex ",
       required: true,
     },
     {
       label: "Your Email",
-      placeholder: "eg muradali@gmail.com",
+      placeholder: "eg. example@gmail.com",
       required: true,
     },
     {

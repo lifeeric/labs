@@ -1,4 +1,4 @@
-export default (mesg: string, err: boolean = true, array: []) =>
+export default (mesg: string, err: boolean | undefined = true, array?: []) =>
   Array.isArray(array)
     ? [
         {

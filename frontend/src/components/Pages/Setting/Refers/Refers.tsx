@@ -1,11 +1,31 @@
-
 import * as React from "react"
-import { useState } from "react"
+import Clipboard from "react-clipboard.js"
 
-interface Props {}
+interface Props {
+  openSnackbarHandler: () => void
+}
 
-export const Refers: React.FC<Props> = ({}) => {
-    const [state, setState] = useState<boolean | undefined>(undefined)
+export const Refers: React.FC<Props> = ({ openSnackbarHandler }) => {
+  const getText = (): string => {
+    openSnackbarHandler()
+    return "https://example.com/ref=233"
+  }
 
-    return <h1> Refers Component </h1>
-} 
+  return (
+    <div className="user__refered">
+      <h2>
+        Your refered <span className="user__number">20</span>
+      </h2>
+      <div className="user__reflink">
+        <Clipboard
+          option-text={getText}
+          component="a"
+          button-href="javascript:void(0)"
+          data-clipboard-text="https://example.com/ref=233"
+        >
+          https://example.com/ref=233
+        </Clipboard>
+      </div>
+    </div>
+  )
+}

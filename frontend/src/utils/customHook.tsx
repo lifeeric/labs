@@ -1,4 +1,4 @@
-import { gql, useQuery, useReactiveVar } from "@apollo/client"
+import { gql, useReactiveVar } from "@apollo/client"
 import { stateVar } from "./cache"
 
 const GET_STATE = gql`

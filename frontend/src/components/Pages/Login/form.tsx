@@ -22,23 +22,23 @@ export const Form: React.FC<Props> = ({ formData }) => {
   const [loginStatus, setLoginStatus] = useState<any>()
   const { register, handleSubmit, watch } = useForm()
 
-  useEffect(() => {
-    if (data) {
-      setLoginStatus(data.login)
-      login(data.login)
-      if (data.login.__typename === "LoginUserResult") {
-        setUser({
-          _id: data.login._id,
-          name: "",
-          email: data.login.email,
-          token: data.login.token,
-        })
-        navigate("/dashboard")
-      }
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (!data) return
+  //   setLoginStatus(data.login)
+  //   login(data.login)
+  //   if (data.login.__typename === "LoginUserResult") {
+  //     setUser({
+  //       _id: data.login._id,
+  //       name: "",
+  //       email: data.login.email,
+  //       token: data.login.token,
+  //     })
+  //     navigate("/dashboard")
+  //   }
+  // }, [data])
 
   const onSubmit = (fdata: any): void => {
+    console.log(fdata)
     getLogin({ variables: { email: fdata.Email, password: fdata.Password } })
   }
 
