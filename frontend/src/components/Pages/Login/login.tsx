@@ -1,13 +1,28 @@
 import * as React from "react"
+import { useState, useEffect } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-import { Form } from "./form"
+import { Form } from "./Form/form"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import "react-tabs/style/react-tabs.css"
+import { Snackbar } from "../../UI/Snackbar/Snackbar"
 
+import "react-tabs/style/react-tabs.css"
 import "./login.scss"
 
-export const Login: React.FC = () => {
+type Props = {
+  path: any
+}
+
+export const Login: React.FC<Props> = () => {
+  const [setupForm, setSetupForm] = useState<string>("")
+  const [status, setStatus] = useState<string>()
+  const [message, setMessage] = useState<string>("")
+  const [snackbar, setSnackbar] = useState<boolean>(false)
+
+  useEffect(() => {
+    setTimeout(() => setSnackbar(false), 5000)
+  }, [snackbar])
+
   // fetching image
   const { file } = useStaticQuery(graphql`
     query {
@@ -23,76 +38,106 @@ export const Login: React.FC = () => {
     }
   `)
 
-  /*
-   * login Data
-   */
-  const loginData = [
-    {
-      label: "Email",
-      placeholder: "youremail@example.com",
-      required: true,
-    },
-    {
-      label: "Password",
-      type: "password",
-      placeholder: "********",
-      required: true,
-    },
-  ]
+  const detectorForm = (val: string) => {
+    setSetupForm(val)
+  }
 
-  /**
-   * registering new user
-   */
-  const registerUser = [
-    {
-      label: "Full Name",
-      placeholder: "Alex ",
-      required: true,
-    },
-    {
-      label: "Your Email",
-      placeholder: "eg. example@gmail.com",
-      required: true,
-    },
-    {
-      label: "Password",
-      type: "password",
-      placeholder: "********",
-      required: true,
-    },
-  ]
+  const openSnackbarHanlder = (msg: string, status?: string): void => {
+    setSnackbar(true)
+    setMessage(msg)
+    setStatus(status || "danger")
+  }
+  const closeSnackbarHandler = (): void => setSnackbar(false)
 
   return (
-    <div className="login">
-      <h1 className="login__greeting">Welcome back</h1>
-      <div className="login__container">
-        <div className="login__left">
-          <Tabs>
-            <div className="login__tab">
-              <TabList>
-                <Tab>Log In</Tab>
-                <Tab>Sign Up</Tab>
-              </TabList>
-            </div>
-            <div className="login__form">
-              <TabPanel>
-                <Form formData={loginData} />
+    <>
+      <div className="login">
+        <h1 className="login__greeting">Welcome back</h1>
+        <div className="login__container">
+          <div className="login__left">
+            <Tabs>
+              <div className="login__tab">
+                <TabList>
+                  <Tab onClick={detectorForm.bind(null, "login")}>Log In</Tab>
+                  <Tab onClick={detectorForm.bind(null, "signup")}>Sign Up</Tab>
+                </TabList>
+              </div>
+              <div className="login__form">
+                <TabPanel>
+                  <Form
+                    openSnackbar={openSnackbarHanlder}
+                    isForm={setupForm}
+                    formData={loginData}
+                    buttonLabel="Login"
+                  />
 
-                <div className="login__forgot">
-                  <Link to="">Forgot password?</Link>
-                </div>
-              </TabPanel>
-              <TabPanel>
-                <Form formData={registerUser} />
-              </TabPanel>
-            </div>
-          </Tabs>
-        </div>
+                  <div className="login__forgot">
+                    <Link to="/app/forgot-password">Forgot password?</Link>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <Form
+                    openSnackbar={openSnackbarHanlder}
+                    isForm={setupForm}
+                    formData={registerUser}
+                    buttonLabel="Register"
+                  />
+                </TabPanel>
+              </div>
+            </Tabs>
+          </div>
 
-        <div className="login__right">
-          <Img fixed={file.childImageSharp.fixed} />
+          <div className="login__right">
+            <Img fixed={file.childImageSharp.fixed} />
+          </div>
         </div>
       </div>
-    </div>
+
+      <Snackbar
+        isOpen={snackbar}
+        text={message}
+        state={status}
+        closeSnackbar={closeSnackbarHandler}
+      />
+    </>
   )
 }
+
+/*
+ * login Data
+ */
+const loginData = [
+  {
+    label: "Email",
+    placeholder: "youremail@example.com",
+    required: true,
+  },
+  {
+    label: "Password",
+    type: "password",
+    placeholder: "********",
+    required: true,
+  },
+]
+
+/**
+ * registering new user
+ */
+const registerUser = [
+  {
+    label: "Full Name",
+    placeholder: "Alex ",
+    required: true,
+  },
+  {
+    label: "Your Email",
+    placeholder: "eg. example@gmail.com",
+    required: true,
+  },
+  {
+    label: "Password",
+    type: "password",
+    placeholder: "********",
+    required: true,
+  },
+]

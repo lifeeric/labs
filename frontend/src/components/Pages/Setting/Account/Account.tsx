@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Input } from "../../Login/Input"
+import { Input } from "../../Login/Input/Input"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { GET_USER_SETTING } from "../../../../utils/gql"
 import { useQuery } from "@apollo/client"

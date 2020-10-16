@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 export default gql`
   extend type Query {
     login(email: String!, password: String!): LoginUnion!
-    forgotPassword(email: String!): ForgotPassUnion!
+    # forgotPassword(email: String!): ForgotPassUnion!
+    forgotPassword(email: String!): Error!
     userSetting(id: ID!): UserSettingUnion!
   }
 
@@ -15,7 +16,7 @@ export default gql`
     token: String!
   }
 
-  union ForgotPassUnion = ForgetPassordResult | Error
+  # union ForgotPassUnion = ForgetPassordResult | Error
 
   type ForgetPassordResult {
     id: ID!

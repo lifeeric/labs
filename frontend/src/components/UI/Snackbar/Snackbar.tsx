@@ -32,6 +32,9 @@ const SnackBarComp = styled.div<StyleProps>`
   cursor: pointer;
   overflow: hidden;
 `
+const Message = styled.div`
+  margin-righ: 20px;
+`
 
 const Close = styled.span`
   width: 20px;
@@ -69,11 +72,10 @@ const propsAreEqual = (prevProps: any, nextProps: any) => {
 export const Snackbar: React.FC<Props> = React.memo(
   ({ state, isOpen, text, closeSnackbar }) => {
     if (!isOpen) return null
-    console.log(state, isOpen, " Snackbar ->")
 
     return (
       <SnackBarComp type={state}>
-        {text}
+        <Message>{text}</Message>
         <Close>
           <Ripples>
             <MdClose onClick={closeSnackbar} />

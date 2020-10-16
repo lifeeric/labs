@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
 import { Model } from "../../../UI/Model/Model"
-import { Input } from "../../Login/Input"
+import { Input } from "../../Login/Input/Input"
 import { SimpleButton } from "../../../UI/SimpleButton/SimpleButton"
 import styled from "styled-components"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
@@ -139,7 +139,8 @@ export const AddExpenses: React.FC<Props> = ({
         </Center>
       </Model>
       <Snackbar
-        state={snackbar}
+        // state={snackbar}
+        isOpen={snackbar}
         text="Item Successfully added!"
         closeSnackbar={closeSnackbarHandler}
       />

@@ -8,6 +8,7 @@ export interface IUser extends Document {
   refered: string[];
   _doc: any;
   createdAt: string;
+  id: any;
 }
 
 const userSchema: Schema = new Schema(

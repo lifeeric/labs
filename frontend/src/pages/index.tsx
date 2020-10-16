@@ -3,6 +3,4 @@ import Home from "./home"
 
 import "./index.scss"
 
-export default () => {
-  return <Home />
-}
+export default () => <Home />

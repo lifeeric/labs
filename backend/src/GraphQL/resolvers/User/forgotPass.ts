@@ -27,22 +27,29 @@ export default {
     /**
      * Email sending with the link to reset passwrod
      */
-    mailer(
+    return mailer(
+      email,
       "Reset password",
       `
         <p> click the link below to reset password!</p>
-        <a href="${"fe"}">click here</a>
+        <a href="http://localhost:8000/app/forgot-password/reset?token=${token}">click here</a>
       `
-    ).then((res) => res);
+    ).then((res) => {
+      return {
+        __typename: "Error",
+        error: true,
+        message: "Email has been sent with the rest link",
+      };
+    });
 
     /**
      * send data as response
      */
-    return {
-      __typename: "ForgetPassordResult",
-      id: doesEmailExist._id,
-      email,
-      token,
-    };
+    // return {
+    //   __typename: "ForgetPassordResult",
+    //   id: doesEmailExist._id,
+    //   email,
+    //   token,
+    // };
   },
 };

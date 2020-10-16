@@ -2,7 +2,7 @@ import Users from "../../../Models/user.model";
 import { hashingPassword, throwError } from "../../../Helper";
 
 export default {
-  createUser: async (paretn: any, args: any, context: any) => {
+  createUser: async (parent: any, args: any, context: any) => {
     const { name, email, password, company, referedBy } = args.user;
 
     // check user exists
@@ -40,6 +40,7 @@ export default {
     return {
       __typename: "UserResult",
       ...result._doc,
+      _id: result._id,
       password: "null",
     };
   },

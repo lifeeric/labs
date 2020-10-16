@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useEffect } from "react"
-import { Input } from "../../Login/Input"
+import { Input } from "../../Login/Input/Input"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { UPDATE_PASSWD } from "../../../../utils/gql"
 import { customHook } from "../../../../utils/customHook"

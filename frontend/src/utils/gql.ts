@@ -107,3 +107,50 @@ export const UPDATE_PASSWD = gql`
     }
   }
 `
+
+export const REGISTER_USER = gql`
+  mutation(
+    $name: String!
+    $email: String!
+    $password: String!
+    $company: String
+    $referedBy: ID
+  ) {
+    createUser(
+      user: {
+        name: $name
+        email: $email
+        password: $password
+        company: $company
+        referedBy: $referedBy
+      }
+    ) {
+      __typename
+      ... on UserResult {
+        _id
+      }
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const FORGOT_PASSWORD = gql`
+  query FORGOT_PASSWORD($email: String!) {
+    forgotPassword(email: $email) {
+      error
+      message
+    }
+  }
+`
+
+export const REST_PASSWORD = gql`
+  mutation($id: ID!, $password: String!, $passwordAgain: String!) {
+    resetPassword(id: $id, password: $password, passwordAgain: $passwordAgain) {
+      error
+      message
+    }
+  }
+`
