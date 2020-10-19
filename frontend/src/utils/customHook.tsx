@@ -31,3 +31,14 @@ export const login = (currentUser: TLogin) => {
     currentUser,
   })
 }
+
+// problem with token type
+export const updateToken = (token: any) => {
+  stateVar({
+    ...stateVar(),
+    currentUser: {
+      ...stateVar().currentUser,
+      token: token,
+    },
+  })
+}

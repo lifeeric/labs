@@ -40,7 +40,7 @@ export default gql`
 
   extend type Mutation {
     createUser(user: addNewUser): UserUnion!
-    resetPassword(id: ID!, password: String, passwordAgain: String): Error!
+    resetPassword(id: ID!, validateURL: Boolean, password: String, passwordAgain: String): Error!
     updateUserSetting(
       id: ID!
       name: String!

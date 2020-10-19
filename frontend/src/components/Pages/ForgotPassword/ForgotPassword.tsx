@@ -2,15 +2,23 @@ import * as React from "react"
 import { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import { SuccessAnimation } from "../../UI/SuccessAnimation/SuccessAnimation"
-import { useLocation, useParams } from "@reach/router"
+import { useLocation } from "@reach/router"
+import { updateToken } from "../../../utils/customHook"
 import { parse } from "query-string"
 import { Form } from "./Form/Form"
 import styled from "styled-components"
+import { useMutation } from "@apollo/client"
+import { RESET_PASSWORD } from "../../../utils/gql"
 
 import "./ForgotPassword.scss"
 
 type Props = {
   path: any
+}
+
+type TFormStatus = {
+  title: string
+  message?: string
 }
 
 /**
@@ -21,18 +29,26 @@ const MarginTop = styled.div`
 `
 
 export const ForgotPassword: React.FC<Props> = () => {
-  const [statusMessage, setStatusMessage] = useState()
+  const [formSendingStatus, setformSendingStatusMsg] = useState<TFormStatus>()
   const [resetForm, setResetForm] = useState<boolean>(false)
-
-  const params = useParams()
   const location = useLocation()
+  const [mutate, { data, loading, error }] = useMutation(RESET_PASSWORD)
+
+  const token = parse(location.search).token || ""
+  const uniqid = parse(location.search).uniqid
+  token && updateToken(token)
+  token &&
+    !formSendingStatus &&
+    mutate({ variables: { id: uniqid, validateURL: true } })
 
   useEffect(() => {
-    if (parse(location.search).token) setResetForm(true)
+    if (token) {
+      setResetForm(true)
+    }
   }, [])
 
-  const statusMessageHandler = (msg: any): void => {
-    setStatusMessage(msg)
+  const formSendingStatusHandler = (msg: any): void => {
+    setformSendingStatusMsg(msg)
   }
 
   let formContainer = (
@@ -45,37 +61,47 @@ export const ForgotPassword: React.FC<Props> = () => {
         </p>
       </div>
       <Form
-        setStatus={statusMessageHandler}
+        formSendingStatus={formSendingStatusHandler}
         inputFields={inputForgotPassword}
       />
     </>
   )
 
-  if (statusMessage)
+  if (formSendingStatus)
     formContainer = (
       <>
-        <SuccessAnimation />
+        <SuccessAnimation animation="success" />
         <div>
-          <h3>Email Sent successfully!</h3>
-          <p>
-            if an email is registered in our system, You'll receive an email
-            shortly.
-          </p>
+          <h3>{formSendingStatus.title}</h3>
+          <p>{formSendingStatus.message}</p>
           <Link to="/app/login">Back to Log in</Link>
         </div>
       </>
     )
-
-  if (resetForm)
+  else if (resetForm)
     formContainer = (
       <>
         <h2>Enter Your new Passwrod</h2>
         <MarginTop>
           <Form
             inputFields={inputResetingPassword}
-            setStatus={statusMessageHandler}
+            formSendingStatus={formSendingStatusHandler}
+            uniqid={uniqid}
           />
         </MarginTop>
+      </>
+    )
+
+  if (loading) return <h1>Loading....</h1>
+  else if (data && data.resetPassword.error)
+    formContainer = (
+      <>
+        <SuccessAnimation animation="failed" />
+        <div>
+          <h3>Oops, looks like Link has been expired!</h3>
+
+          <Link to="/app/login">Back to Log in</Link>
+        </div>
       </>
     )
 

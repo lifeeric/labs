@@ -23,7 +23,7 @@ export const User: React.FC<Props> = ({}) => {
     setStatus(message)
   }
 
-  console.log(snackbar, ' User.tsx');
+  console.log(snackbar, " User.tsx")
 
   useEffect(() => {
     snackbar &&
@@ -38,7 +38,10 @@ export const User: React.FC<Props> = ({}) => {
       <Box>
         <div className="user">
           <div className="user__split">
-            <Account />
+            <Account
+              openSnackbarHandler={openSnackbarHandler}
+              statusHandler={statusHandler}
+            />
           </div>
           <div className="user__split">
             <Hpasswd

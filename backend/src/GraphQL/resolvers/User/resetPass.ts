@@ -13,7 +13,7 @@ export default {
     /**
      * Simpliy arguments, desctructing
      */
-    const { id, password, passwordAgain } = args;
+    const { id, password, passwordAgain, validateURL } = args;
     const {
       isAuth,
       headers: { authorization },
@@ -29,7 +29,6 @@ export default {
      */
     const key = user?.password + "-" + user?.createdAt;
     const token = authorization && authorization.split(" ")[1];
-
     // token not provided
     if (!!!token) return throwError("The URL doesn't seem to be valid!");
 
@@ -43,10 +42,13 @@ export default {
       return throwError("The link has been expired!");
     }
 
+    if (validateURL) return throwError("Link is valid", false);
+
     /**
      * Token didn't match
      */
-    if (!!!decodedToken) return throwError("Token doesn't Match!");
+    if (!!!decodedToken && decodedToken.userId !== id)
+      return throwError("Token doesn't Match!");
 
     /**
      * password doesn't match

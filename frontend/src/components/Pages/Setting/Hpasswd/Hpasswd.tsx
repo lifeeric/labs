@@ -78,7 +78,12 @@ export const Hpasswd: React.FC<Props> = ({
             <Input {...input} register={register} key={input.label} />
           ))}
 
-          <Button width="120px" type="primary" btnType={true}>
+          <Button
+            width="120px"
+            type="primary"
+            btnType={true}
+            isLoading={loading}
+          >
             Update
           </Button>
         </form>

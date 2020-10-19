@@ -15,7 +15,7 @@ export const PrivateRoute: React.FC<Props> = ({
   const { currentUser } = customHook()
   const isLoggedIn = !!currentUser.email
   if (!isLoggedIn) {
-    navigate("/login")
+    navigate("/app/login")
     return null
   }
 

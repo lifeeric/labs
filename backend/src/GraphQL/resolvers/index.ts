@@ -9,6 +9,7 @@ import getExpenses from "./expenses/getExpenses";
 import addTemplate from "./testTemplate/addTemplate";
 import reports from "./report/report";
 import getReports from "./report/getReports";
+import updateUserSetting from "./User/updateUserSetting";
 
 export default {
   Query: {
@@ -25,5 +26,6 @@ export default {
     ...addExpenses,
     ...addTemplate,
     ...reports,
+    ...updateUserSetting,
   },
 };

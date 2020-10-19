@@ -1,12 +1,17 @@
 import * as React from "react"
 import Lottie from "react-lottie"
 import SuccessAni from "../../../lotties/success-animation.json"
+import FailedAni from "../../../lotties/failed.json"
 
-export const SuccessAnimation: React.FC = () => {
+interface Props {
+  animation: string
+}
+
+export const SuccessAnimation: React.FC<Props> = ({ animation }) => {
   const defaultOptions = {
     loop: false,
     autoplay: true,
-    animationData: SuccessAni,
+    animationData: animation === "success" ? SuccessAni : FailedAni,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },

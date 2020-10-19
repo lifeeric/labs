@@ -1,20 +1,24 @@
+/**
+ * This component is not in uses, build for testing
+ */
+
 import * as React from "react"
 import { useState, useReducer } from "react"
 import { useLocalStorage } from "./localStorage"
 
 type IState = {
-  sidebar: boolean;
-  toggleSidebar: () => void;
+  sidebar: boolean
+  toggleSidebar: () => void
   currentUser: {
-    name: string;
-    email: string;
-    token: string;
-  },
-  authorized: boolean;
+    name: string
+    email: string
+    token: string
+  }
+  authorized: boolean
 }
 
 export const LocalContext = React.createContext({})
-const initialState:IState = {
+const initialState: IState = {
   sidebar: false,
   toggleSidebar: () => {},
   currentUser: {
@@ -25,12 +29,12 @@ const initialState:IState = {
   authorized: false,
 }
 
-const uiReducer = (state:any, action:any) => {
-  switch(action.type) {
-    case '':
+const uiReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "":
       return {
         ...state,
-      };
+      }
   }
 }
 

@@ -14,13 +14,17 @@ type Props = {
 }
 
 export const Login: React.FC<Props> = () => {
-  const [setupForm, setSetupForm] = useState<string>("")
+  const [setupForm, setSetupForm] = useState<string>("login")
   const [status, setStatus] = useState<string>()
   const [message, setMessage] = useState<string>("")
-  const [snackbar, setSnackbar] = useState<boolean>(false)
+  const [snackbar, setSnackbar] = useState<boolean | undefined>(undefined)
 
+  console.log(snackbar, " Login started rendered")
   useEffect(() => {
-    setTimeout(() => setSnackbar(false), 5000)
+    if (!snackbar) return
+    setTimeout(() => {
+      setSnackbar(false), console.log("snackbar closed")
+    }, 5000)
   }, [snackbar])
 
   // fetching image
@@ -43,9 +47,10 @@ export const Login: React.FC<Props> = () => {
   }
 
   const openSnackbarHanlder = (msg: string, status?: string): void => {
-    setSnackbar(true)
     setMessage(msg)
+    setSnackbar(true)
     setStatus(status || "danger")
+    console.log(msg, " Snackbar")
   }
   const closeSnackbarHandler = (): void => setSnackbar(false)
 

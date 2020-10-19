@@ -25,42 +25,36 @@ export const Form: React.FC<Props> = ({
   openSnackbar,
 }) => {
   const [getUser, setUser] = useLocalStorage()
-  const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY)
+  const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY, {
+    fetchPolicy: "network-only",
+  })
   const [addUser, { data: reg_data, loading: reg_loading }] = useMutation(
     REGISTER_USER
   )
   const { register, handleSubmit, watch, reset } = useForm()
 
   useEffect(() => {
-    if (data) {
+    if (data && data.login.__typename === "LoginUserResult") {
       login(data.login)
-      if (data.login.__typename === "LoginUserResult") {
-        setUser({
-          _id: data.login._id,
-          name: "",
-          email: data.login.email,
-          token: data.login.token,
-        })
-        navigate("/dashboard")
-      }
-      if(data.login.__typename === "Error") {
-        openSnackbar(
-          "User don't exist in our system!",
-          "danger"
-        )
-      }
+      setUser({
+        _id: data.login._id,
+        name: "",
+        email: data.login.email,
+        token: data.login.token,
+      })
+      navigate("/app/dashboard")
+    }
+    if (data && data.login.__typename === "Error") {
+      openSnackbar(data.login.message, "danger")
     }
 
     // For Registration
-    if (reg_data) {
-      if (reg_data.createUser.__typename === "UserResult") {
-        openSnackbar(
-          "User successfully registered!",
-          "success"
-        )
-        reset()
-      } else openSnackbar(reg_data.createUser.message)
+    if (reg_data && reg_data.createUser.__typename === "UserResult") {
+      openSnackbar("User successfully registered!", "success")
+      reset()
     }
+    if (reg_data && reg_data.createUser.__typename === "Error")
+      openSnackbar(reg_data.createUser.message, "danger")
   }, [data, reg_data])
 
   const onSubmit = (fdata: any): void => {

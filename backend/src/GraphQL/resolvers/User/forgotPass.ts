@@ -15,11 +15,14 @@ export default {
     const doesEmailExist = await Users.findOne({ email });
 
     // user doesn't find
-    if (!doesEmailExist) return throwError("Email doesn't find!");
+    if (!doesEmailExist)
+      return throwError("Email has been sent with the rest link");
 
     /**
      * Generate jwt token for passwrod resetting
      */
+
+    console.log(doesEmailExist);
 
     const key = doesEmailExist.password + "-" + doesEmailExist.createdAt;
     const token = jwtHelper(email, doesEmailExist, key, 3600);
@@ -32,7 +35,7 @@ export default {
       "Reset password",
       `
         <p> click the link below to reset password!</p>
-        <a href="http://localhost:8000/app/forgot-password/reset?token=${token}">click here</a>
+        <a href="http://localhost:8000/app/forgot-password/reset?token=${token}&uniqid=${doesEmailExist._id}">click here</a>
       `
     ).then((res) => {
       return {

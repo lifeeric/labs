@@ -21,7 +21,6 @@ export default (request: any, key = privateKey) => {
 
   // token not found
   if (!token[1]) {
-    request.res.status(401);
     return {
       isAuth: false,
     };
@@ -32,14 +31,12 @@ export default (request: any, key = privateKey) => {
   try {
     decodeToken = jwt.verify(token[1], key);
   } catch (err) {
-    request.res.status(401);
     return {
       isAuth: false,
     };
   }
 
   if (!!!decodeToken) {
-    request.res.status(401);
     return {
       isAuth: false,
     };

@@ -45,7 +45,7 @@ export const Navbar: React.FC<Props> = ({ sideDrawer }) => {
 
         <li className="nav__item nav--right">
           <ul className="nav__list">
-            <NavbarLink to="/login" text="Log In" />
+            <NavbarLink to="/app/login" text="Log In" />
             <li className="nav__item item--button">
               <Button type="primary" width="100px">
                 Sign Up

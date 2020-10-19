@@ -7,7 +7,7 @@ interface Props {
   text: string
   closeSnackbar: () => void
   state?: string
-  isOpen: boolean
+  isOpen: boolean | undefined
 }
 
 interface StyleProps {

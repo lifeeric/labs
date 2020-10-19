@@ -146,11 +146,46 @@ export const FORGOT_PASSWORD = gql`
   }
 `
 
-export const REST_PASSWORD = gql`
-  mutation($id: ID!, $password: String!, $passwordAgain: String!) {
-    resetPassword(id: $id, password: $password, passwordAgain: $passwordAgain) {
+export const RESET_PASSWORD = gql`
+  mutation(
+    $id: ID!
+    $validateURL: Boolean
+    $password: String
+    $passwordAgain: String
+  ) {
+    resetPassword(
+      id: $id
+      validateURL: $validateURL
+      password: $password
+      passwordAgain: $passwordAgain
+    ) {
       error
       message
+    }
+  }
+`
+
+export const UPDATE_USER_SETTING = gql`
+  mutation ($id: ID!, $name: String!, $email: String!, $company: String!) {
+    updateUserSetting(
+      id: $id
+      name: $name
+      email: $email
+      company: $company
+    ) {
+      __typename
+      ... on GetUserSettingResult {
+        name
+        email
+        company
+        refered {
+          name
+        }
+      }
+      ... on Error {
+        error
+        message
+      }
     }
   }
 `

@@ -25,33 +25,33 @@ export const Sidebar: React.FC<Props> = () => {
    */
   const linksData = [
     {
-      to: "/dashboard",
+      to: "/app/dashboard",
       text: "Dashboard",
       icon: <MdDashboard />,
       clx: "",
     },
     {
-      to: "/addreport",
+      to: "/app/addreport",
       text: "Add Report",
       icon: <MdNoteAdd />,
     },
     {
-      to: "/patientdata",
+      to: "/app/patientdata",
       text: "Patient data",
       icon: <RiFileUserFill />,
     },
     {
-      to: "/analytics",
+      to: "/app/analytics",
       text: "Analytics",
       icon: <SiGoogleanalytics />,
     },
     {
-      to: "/expenses",
+      to: "/app/expenses",
       text: "Expenses",
       icon: <FaRegMoneyBillAlt />,
     },
     {
-      to: "/setting",
+      to: "/app/setting",
       text: "Setting",
       icon: <MdSettings />,
     },
