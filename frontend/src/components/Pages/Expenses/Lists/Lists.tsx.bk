@@ -7,28 +7,10 @@ import { Model } from "../../../UI/Model/Model"
 import { Item, dateCompare } from "../Item/Item"
 import { ItemLoading } from "../ItemLoading/ItemLoading"
 import { ModelData } from "../ModelData/ModelData"
-import { makeStyles } from "@material-ui/core/styles"
-import Table from "@material-ui/core/Table"
-import TableBody from "@material-ui/core/TableBody"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
-import { HiDotsVertical } from "react-icons/hi"
 
 import "./Lists.scss"
 
 interface Props {}
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  row: {
-    cursor: 'pointer'
-  }
-})
 
 export const Lists: React.FC<Props> = React.memo(() => {
   const { currentUser } = customHook()
@@ -42,7 +24,6 @@ export const Lists: React.FC<Props> = React.memo(() => {
   )
   const [isModel, setIsModel] = useState<boolean>(false)
   const [dataModel, setDataModel] = useState<any>(null)
-  const classes = useStyles()
 
   if (error) return <p>Error</p>
   let items: any = <ItemLoading />
@@ -57,18 +38,9 @@ export const Lists: React.FC<Props> = React.memo(() => {
     items = [...data.getExpenses].reverse().map((item: any) => {
       return (
         <>
-          <TableRow key={item.id} hover cursor="pointer" className={classes.row} onClick={() => openModelHandler(item)} >
-            <TableCell component="th" scope="row">
-              {new Date(item.date).toLocaleString()}
-            </TableCell>
-            <TableCell align="left">{item.name}</TableCell>
-            <TableCell align="left">{item.description}</TableCell>
-            <TableCell align="left">{item.price}</TableCell>
-          </TableRow>
-
-          {/* <tr className="lists__row" key={item.id}>
+          <tr className="lists__row" key={item.id}>
             <Item {...item} openModelHandler={() => openModelHandler(item)} />
-          </tr> */}
+          </tr>
         </>
       )
     })
@@ -88,19 +60,9 @@ export const Lists: React.FC<Props> = React.memo(() => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">Date</TableCell>
-              <TableCell align="left">Title</TableCell>
-              <TableCell align="left">Description</TableCell>
-              <TableCell align="left">price</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{items}</TableBody>
-        </Table>
-      </TableContainer>
+      <div className="lists">
+        <table className="lists__table">{items}</table>
+      </div>
 
       <Model isOpen={isModel} closeModel={closeModelHandler}>
         <ModelData

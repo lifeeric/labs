@@ -13,6 +13,11 @@
   &__row {
     height: 48px;
     position: relative;
+    
+    &:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
   }
 
   // actions
@@ -22,7 +27,10 @@
     line-height: 52px;
     right: 37px;
     cursor: pointer;
-    border-radius: 20px;
+  }
+
+  // dots
+  &__dots > div {
     background: $pure--white;
   }
 }
