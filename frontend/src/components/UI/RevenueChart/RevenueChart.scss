@@ -1,0 +1,43 @@
+@import "../Theme/variables";
+
+.revenue {
+  padding: 15px;
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  // bills
+  &__bill {
+    display: inline-block;
+    margin-right: 25px;
+  }
+
+  &__month {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  &__cost {
+    font-size: 24px;
+    // font-weight: 550;
+  }
+
+  &__chart {
+    padding: 15px;
+    box-sizing: border-box;
+  }
+}
+
+.cost--green {
+  color: $revenue--green-color;
+}
+
+.cost--red {
+  color: $revenue--red-color;
+}
+
+.month--bold {
+  font-weight: 600;
+}

@@ -2,6 +2,7 @@ import * as React from "react"
 import { Header } from "./Header/Header"
 import { Sidebar } from "./Sidebar/Sidebar"
 import { MainContent } from "../../UI/MainContent/MainContent"
+import { RevenueChart } from "../../UI/RevenueChart/RevenueChart"
 
 export default () => {
   return (
@@ -11,7 +12,8 @@ export default () => {
         <Header />
       </div>
       <MainContent>
-        <h1>Dashboard</h1>
+        <h1>he</h1>
+        <RevenueChart />
       </MainContent>
     </>
   )

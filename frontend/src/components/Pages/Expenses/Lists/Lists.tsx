@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   row: {
-    cursor: 'pointer'
-  }
+    cursor: "pointer",
+  },
 })
 
 export const Lists: React.FC<Props> = React.memo(() => {
@@ -57,7 +57,12 @@ export const Lists: React.FC<Props> = React.memo(() => {
     items = [...data.getExpenses].reverse().map((item: any) => {
       return (
         <>
-          <TableRow key={item.id} hover cursor="pointer" className={classes.row} onClick={() => openModelHandler(item)} >
+          <TableRow
+            key={item.id}
+            hover
+            className={classes.row}
+            onClick={() => openModelHandler(item)}
+          >
             <TableCell component="th" scope="row">
               {new Date(item.date).toLocaleString()}
             </TableCell>
