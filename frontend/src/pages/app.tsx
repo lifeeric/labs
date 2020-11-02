@@ -10,6 +10,8 @@ import { PatientData } from "../components/Pages/PatientData/PatientData"
 import { Dashboard } from "../components/Pages/Dashboard/"
 import { PrivateRoute } from "../components/UI/PrivateRoute/PrivateRoute"
 
+import "./index.scss"
+
 export default () => {
   return (
     <Router>

@@ -2,6 +2,35 @@
 
 .revenue {
   padding: 15px;
+  margin-top: 40px;
+  color: $text--black;
+  position: relative;
+
+  &__filter {
+    position: absolute;
+    right: 23px;
+    top: 23px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  &__circle {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50px;
+    display: inline-flex;
+
+    // ripple effecct
+    & > div {
+      width: 100%;
+    }
+
+    // filter icon
+    & > div > svg {
+      margin: auto;
+    }
+  }
 
   &__title {
     margin-bottom: 30px;
@@ -15,7 +44,7 @@
 
   &__month {
     display: block;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 5px;
   }
 

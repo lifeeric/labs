@@ -12,7 +12,6 @@ export default () => {
         <Header />
       </div>
       <MainContent>
-        <h1>he</h1>
         <RevenueChart />
       </MainContent>
     </>

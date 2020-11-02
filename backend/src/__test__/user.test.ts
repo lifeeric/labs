@@ -16,9 +16,9 @@ const axios_post = async (API: string, query: string) => {
 };
 
 describe("User.ts", () => {
-  beforeAll(async () => {
-    return await pExec(CMD_SEED_DB);
-  });
+  // beforeAll(async () => {
+  //   return await pExec(CMD_SEED_DB);
+  // });
 
   it("Should create user", async () => {
     const query = `

@@ -15,12 +15,10 @@ const Expenses: Schema = new Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     date: Date,
-    createdBy: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Users",
-      },
-    ],
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "Users",
+    },
   },
   {
     timestamps: true,

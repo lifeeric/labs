@@ -10,6 +10,7 @@ import addTemplate from "./testTemplate/addTemplate";
 import reports from "./report/report";
 import getReports from "./report/getReports";
 import updateUserSetting from "./User/updateUserSetting";
+import getChartData from "./expenses/getChartData";
 
 export default {
   Query: {
@@ -18,6 +19,7 @@ export default {
     ...userSetting,
     ...getExpenses,
     ...getReports,
+    ...getChartData,
   },
   Mutation: {
     ...Users,

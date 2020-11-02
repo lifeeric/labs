@@ -16,9 +16,9 @@ const axios_post = async (API: string, query: string) => {
 };
 
 describe("ForgotPass testing", () => {
-  beforeAll(async () => {
-    await pExec(CMD_SEED_DB);
-  });
+  // beforeAll(async () => {
+  //   await pExec(CMD_SEED_DB);
+  // });
 
   it("should get the data", async () => {
     const query = `
