@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client"
 import { GET_EXPENSES_LIST } from "../../../../utils/gql"
 import { customHook } from "../../../../utils/customHook"
 import { Model } from "../../../UI/Model/Model"
-import { Item, dateCompare } from "../Item/Item"
 import { ItemLoading } from "../ItemLoading/ItemLoading"
 import { ModelData } from "../ModelData/ModelData"
 import { makeStyles } from "@material-ui/core/styles"
@@ -24,6 +23,7 @@ interface Props {}
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+    overflowX: "auto",
   },
   row: {
     cursor: "pointer",
@@ -70,10 +70,6 @@ export const Lists: React.FC<Props> = React.memo(() => {
             <TableCell align="left">{item.description}</TableCell>
             <TableCell align="left">{item.price}</TableCell>
           </TableRow>
-
-          {/* <tr className="lists__row" key={item.id}>
-            <Item {...item} openModelHandler={() => openModelHandler(item)} />
-          </tr> */}
         </>
       )
     })

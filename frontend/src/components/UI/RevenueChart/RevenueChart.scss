@@ -33,7 +33,9 @@
   }
 
   &__title {
-    margin-bottom: 30px;
+    margin-bottom: 19px;
+    margin-top: 15px;
+    font-size: 22px;
   }
 
   // bills
@@ -67,6 +69,6 @@
   color: $revenue--red-color;
 }
 
-.month--bold {
-  font-weight: 600;
-}
+// .month--bold {
+//   font-weight: 600;
+// }

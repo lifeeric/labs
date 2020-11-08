@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 export default gql`
   extend type Query {
     getExpenses(id: ID!): [getExpensesUnion]!
-    getChartData(id: ID): [GetChartUnion]!
+    getChartData(id: ID!, date: String!): [GetChartUnion]!
   }
 
   union getExpensesUnion = GetExpensesResult | Error

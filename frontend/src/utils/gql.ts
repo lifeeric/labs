@@ -166,13 +166,8 @@ export const RESET_PASSWORD = gql`
 `
 
 export const UPDATE_USER_SETTING = gql`
-  mutation ($id: ID!, $name: String!, $email: String!, $company: String!) {
-    updateUserSetting(
-      id: $id
-      name: $name
-      email: $email
-      company: $company
-    ) {
+  mutation($id: ID!, $name: String!, $email: String!, $company: String!) {
+    updateUserSetting(id: $id, name: $name, email: $email, company: $company) {
       __typename
       ... on GetUserSettingResult {
         name
@@ -181,6 +176,25 @@ export const UPDATE_USER_SETTING = gql`
         refered {
           name
         }
+      }
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const GET_CHART_DATA = gql`
+  query Get_Chart_Data($id: ID!, $date: String!) {
+    getChartData(id: $id, date: $date) {
+      __typename
+      ... on GetChartResult {
+        id {
+          _id
+          date
+        }
+        totalPrice
       }
       ... on Error {
         error

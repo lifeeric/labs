@@ -5,8 +5,10 @@ import { Header } from "../Dashboard/Header/Header"
 export const PatientData: React.FC = () => {
   return (
     <>
-      <Sidebar />
-      <Header />
+      <div>
+        <Sidebar />
+        <Header />
+      </div>
     </>
   )
 }

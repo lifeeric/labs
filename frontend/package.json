@@ -38,6 +38,7 @@
     "react": "^16.12.0",
     "react-alert": "^7.0.2",
     "react-chartjs-2": "^2.10.0",
+    "react-circular-progressbar": "^2.0.3",
     "react-clipboard.js": "^2.0.16",
     "react-content-loader": "^5.1.2",
     "react-dom": "^16.12.0",
@@ -50,6 +51,7 @@
     "react-ripples": "^2.2.1",
     "react-scroll": "^1.8.1",
     "react-tabs": "^3.1.1",
+    "react-to-print": "^2.11.0",
     "styled-components": "^5.1.1",
     "typeface-poppins": "^0.0.72"
   },

@@ -7,11 +7,12 @@ import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import Fade from "@material-ui/core/Fade"
 
-interface Props {}
+interface Props {
+  filter: string
+  setFilter: (value: string) => void
+}
 
-export const Filter: React.FC<Props> = ({}) => {
-  const [filter, setFilter] = useState<string | undefined>(undefined)
-
+export const Filter: React.FC<Props> = ({ filter, setFilter }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
@@ -23,8 +24,9 @@ export const Filter: React.FC<Props> = ({}) => {
     setAnchorEl(null)
   }
 
-  const filterHandler = (value: string) => {
+  const filterHandler = (value: string): void => {
     console.log(value)
+    setFilter(value)
     handleClose()
   }
 
@@ -42,8 +44,12 @@ export const Filter: React.FC<Props> = ({}) => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          {["Yesterday", "This Month", "Previous Month"].map(f => (
-            <MenuItem key={f} onClick={filterHandler.bind(null, f)}>
+          {["Today", "Yesterday", "This Month", "Previous Month"].map(f => (
+            <MenuItem
+              key={f}
+              selected={f === filter}
+              onClick={filterHandler.bind(null, f)}
+            >
               {f}
             </MenuItem>
           ))}

@@ -1,36 +1,36 @@
-@import "../../../UI/Theme/variables";
+// @import "../../../UI/Theme/variables";
 
-.lists {
-  margin: 17px;
-  overflow-x: auto;
+// .lists {
+//   margin: 17px;
+//   overflow-x: auto;
 
-  // table
-  &__table {
-    min-width: 600px;
-  }
+//   // table
+//   // &__table {
+//   //   min-width: 600px;
+//   // }
 
-  // row
-  &__row {
-    height: 48px;
-    position: relative;
+//   // // row
+//   // &__row {
+//   //   height: 48px;
+//   //   position: relative;
     
-    &:hover {
-      background-color: #f1f1f1;
-      cursor: pointer;
-    }
-  }
+//   //   &:hover {
+//   //     background-color: #f1f1f1;
+//   //     cursor: pointer;
+//   //   }
+//   // }
 
-  // actions
-  &__action {
-    font-size: 1.5em;
-    position: absolute;
-    line-height: 52px;
-    right: 37px;
-    cursor: pointer;
-  }
+//   // // actions
+//   // &__action {
+//   //   font-size: 1.5em;
+//   //   position: absolute;
+//   //   line-height: 52px;
+//   //   right: 37px;
+//   //   cursor: pointer;
+//   // }
 
-  // dots
-  &__dots > div {
-    background: $pure--white;
-  }
-}
+//   // // dots
+//   // &__dots > div {
+//   //   background: $pure--white;
+//   // }
+// }

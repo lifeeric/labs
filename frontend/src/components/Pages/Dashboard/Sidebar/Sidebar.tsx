@@ -2,7 +2,6 @@ import * as React from "react"
 import { MdDashboard } from "react-icons/md"
 import { MdNoteAdd } from "react-icons/md"
 import { RiFileUserFill } from "react-icons/ri"
-import { SiGoogleanalytics } from "react-icons/si"
 import { FaRegMoneyBillAlt } from "react-icons/fa"
 import { MdSettings } from "react-icons/md"
 import { MdHelp } from "react-icons/md"
@@ -39,11 +38,6 @@ export const Sidebar: React.FC<Props> = () => {
       to: "/app/patientdata",
       text: "Patient data",
       icon: <RiFileUserFill />,
-    },
-    {
-      to: "/app/analytics",
-      text: "Analytics",
-      icon: <SiGoogleanalytics />,
     },
     {
       to: "/app/expenses",

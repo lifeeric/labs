@@ -4,6 +4,7 @@ import { Header } from "../Dashboard/Header/Header"
 import { MainContent } from "../../UI/MainContent/MainContent"
 import { SubHeader } from "../../UI/SubHeader/SubHeader"
 import { Box } from "../../UI/Box/Box"
+import { Moveable } from "./Moveable/Moveable"
 
 export const AddReport: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const AddReport: React.FC = () => {
         <SubHeader leftHeader="Add New Report" />
         <Box>
           <h1>Hello</h1>
+          <Moveable />
         </Box>
       </MainContent>
     </>
