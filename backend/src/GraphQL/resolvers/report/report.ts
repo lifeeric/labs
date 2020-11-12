@@ -49,6 +49,9 @@ export default {
       date,
       price,
       user: userId,
+      test_id,
+      test_name,
+      test_result,
     });
     console.log(addNewReport);
 

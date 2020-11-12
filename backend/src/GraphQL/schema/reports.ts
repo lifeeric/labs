@@ -5,7 +5,7 @@ export default gql`
     getReports(id: ID!, patient_id: Int): [getReportUnion]!
   }
 
-  union getReportUnion = Error | getReportResult 
+  union getReportUnion = Error | getReportResult
 
   extend type Mutation {
     addReport(add: addReport!): ReportUnion!
@@ -14,19 +14,21 @@ export default gql`
   union ReportUnion = getReportResult | Error
 
   input addReport {
-    id: ID!
-    patient_id: Int!
+    id: Int
     patient_name: String!
     patient_referedby: String!
     patient_age: Int!
     patient_sex: String!
     price: Float!
     date: String!
+    test_id: String!
+    test_name: String!
+    test_result: String!
   }
 
   type getReportResult {
     id: ID!
-    patient_id: Int!
+    patient_id: Int
     patient_name: String!
     patient_referedby: String!
     patient_age: Int!
