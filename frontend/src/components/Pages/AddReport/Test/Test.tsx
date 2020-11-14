@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow"
 import Paper from "@material-ui/core/Paper"
 import TextField from "@material-ui/core/TextField"
 import { MdDelete } from "react-icons/md"
+import { ITest, ATest } from "../../../../utils/tests"
 
 import "./Test.scss"
 import { Button } from "@material-ui/core"
@@ -31,8 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface Props {
-  resultData: any[]
-  changeResult: (e: any, index: number) => void
+  resultData: ITest[]
+  changeResult: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: number,
+    index: number
+  ) => void
   filterResult: (id: number) => void
 }
 
@@ -44,7 +49,6 @@ export const Test: React.FC<Props> = ({
   const classes = useStyles()
 
   if (!resultData.length) return null
-  console.log(resultData)
 
   return (
     <div className={classes.root}>
@@ -68,8 +72,8 @@ export const Test: React.FC<Props> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {resultData.map((data: any, index) =>
-              data.test.map((item: any[], idx: number) => (
+            {resultData.map((data: ITest, index: number) =>
+              data.test.map((item: ATest, idx: number) => (
                 <TableRow key={item.test_name}>
                   <TableCell component="th" scope="row">
                     {item.test_name}
@@ -79,7 +83,9 @@ export const Test: React.FC<Props> = ({
                   <TableCell align="right">
                     <TextField
                       value={item.results}
-                      onChange={e => changeResult(e, index)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        changeResult(e, index, idx)
+                      }
                     />
                   </TableCell>
                   <TableCell align="right">

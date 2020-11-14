@@ -1,5 +1,6 @@
 import Report from "../../../Models/reports";
 import { throwError, dateISO } from "../../../Helper";
+import uniqID from "nodejs-unique-numeric-id-generator";
 
 export default {
   addReport: async (parent: any, args: any, context: any, info: any) => {
@@ -15,6 +16,7 @@ export default {
       patient_age,
       date,
       price,
+      tests,
     } = args.add;
     const { isAuth, userId } = context.Auth;
 
@@ -27,7 +29,6 @@ export default {
      * Checking empty fields
      */
     if (
-      !patient_id ||
       !patient_name ||
       !patient_referedby ||
       !patient_sex ||
@@ -40,25 +41,26 @@ export default {
     /**
      * add to DB
      */
+    let generate_id = patient_id;
+    if (!patient_id) generate_id = uniqID.generate(new Date().toJSON());
+
     const addNewReport = await new Report({
-      patient_id,
+      patient_id: generate_id,
       patient_name,
       patient_referedby,
       patient_sex,
       patient_age,
       date,
       price,
-      user: userId,
-      test_id,
-      test_name,
-      test_result,
+      createdBy: id,
+      tests,
     });
-    console.log(addNewReport);
 
     /**
      * insert the data and get the result
      */
     const result = await addNewReport.save();
+    console.log(result);
 
     /**
      * Return Result
@@ -66,6 +68,7 @@ export default {
     return {
       __typename: "getReportResult",
       ...result._doc,
+      id: result.id,
       date: dateISO(result.date),
     };
   },

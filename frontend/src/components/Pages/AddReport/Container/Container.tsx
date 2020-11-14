@@ -3,11 +3,26 @@ import { useState, useRef } from "react"
 import { SearchTest } from "../SearchTest/SearchTest"
 import { Test } from "../Test/Test"
 import { PatientsFields } from "../PatientsFields/PatientsFields"
-import { Divider } from "@material-ui/core"
+import { Button, Divider } from "@material-ui/core"
 import styled from "styled-components"
-import { tests } from "../../../../utils/tests"
+import { tests, ITest } from "../../../../utils/tests"
 import { ComponentToPrint } from "../PrintTemplate/PrintTemplate"
 import ReactToPrint from "react-to-print"
+import { useMutation } from "@apollo/client"
+import { ADD_REPORT } from "../../../../utils/gql"
+import { customHook } from "../../../../utils/customHook"
+
+/**
+ * Styled Compoennts
+ */
+
+const FloatRight = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+`
 
 interface Props {}
 
@@ -25,41 +40,58 @@ interface IPatient {
   date: string
 }
 export const Container: React.FC<Props> = ({}) => {
-  const [resultData, setResultData] = useState<any[]>([])
+  const [resultData, setResultData] = useState<ITest[]>([])
   const [patientData, setPatientData] = useState<IPatient | undefined>()
   const componentRef = useRef<any>()
+  const [sex, setSex] = React.useState("")
+  const [name, setName] = useState<string>("")
+  const [referedBy, setReferedBy] = useState<string>("")
+  const [age, setAge] = useState<string>("")
+  const [PID, setPID] = useState<number>()
+  const [cost, setCost] = useState<string>("")
+  const [addReport, { data, loading }] = useMutation(ADD_REPORT)
+  const { currentUser } = customHook()
 
   const addResultHandler = (value: any) => {
-    setResultData(resultData => [...resultData, value])
+    if (!value) return
+    setResultData((resultData: ITest[]) => [...resultData, value])
   }
 
-  const changeResultsHandler = (e: any, index: number) => {
+  const changeResultsHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: number,
+    index: number
+  ) => {
     const newValue = e.target.value
-    console.log(newValue, index)
-    const newResults: any = [...resultData]
+    const newResults = [...resultData[id].test]
     newResults[index].results = newValue
-    setResultData(newResults)
+    const newData = [...resultData]
+    newData[id].test = newResults
+    setResultData(newData)
   }
 
   const filterResultHandler = (id: number) => {
-    const oldResultData = [...resultData]
+    const oldResultData: ITest[] = [...resultData]
 
     const newResultData = oldResultData.filter(data => data.id !== id)
     setResultData(newResultData)
   }
 
   const printOut = () => {
-    return <button>Print this out!</button>
+    return (
+      <Button variant="contained" color="primary">
+        Print out
+      </Button>
+    )
   }
 
   /**
    * Patient Data
    */
-  const [sex, setSex] = React.useState("")
-  const [name, setName] = useState<string>("")
-  const [referedBy, setReferedBy] = useState<string>("")
-  const [age, setAge] = useState<string>("")
-  const [cost, setCost] = useState<string>("")
+  const patientIdHandler = (e: any): void => {
+    const name = e.target.value
+    setPID(name)
+  }
 
   const nameHandler = (e: any): void => {
     const name = e.target.value
@@ -84,6 +116,21 @@ export const Container: React.FC<Props> = ({}) => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSex(event.target.value as string)
   }
+  const submitHandler = () => {
+    addReport({
+      variables: {
+        id: currentUser._id,
+        patient_id: "",
+        patient_name: name,
+        patient_age: Number(age),
+        patient_sex: sex,
+        patient_referdby: referedBy,
+        date: new Date().toISOString(),
+        price: Number(cost),
+        tests: resultData,
+      },
+    })
+  }
 
   return (
     <>
@@ -98,6 +145,8 @@ export const Container: React.FC<Props> = ({}) => {
         referedBy={referedBy}
         sex={sex}
         cost={cost}
+        PID={PID}
+        patientIdHandler={patientIdHandler}
       />
       <Divider />
       <Center>
@@ -109,28 +158,31 @@ export const Container: React.FC<Props> = ({}) => {
         filterResult={filterResultHandler}
       />
 
-      <ReactToPrint
-        trigger={printOut}
-        content={() => componentRef.current}
-        // pageStyle={style}
-      />
-      <div style={{ display: "none" }}>
-        <ComponentToPrint
-          ref={componentRef}
-          //   data={patientData}
-          name={name}
-          age={age}
-          referedBy={referedBy}
-          sex={sex}
-          PrintResult={
-            <Test
-              resultData={resultData}
-              changeResult={changeResultsHandler}
-              filterResult={filterResultHandler}
-            />
-          }
+      <FloatRight>
+        <Button onClick={submitHandler}>Save</Button>
+        <ReactToPrint
+          trigger={printOut}
+          content={() => componentRef.current}
+          // pageStyle={style}
         />
-      </div>
+        <div style={{ display: "none" }}>
+          <ComponentToPrint
+            ref={componentRef}
+            //   data={patientData}
+            name={name}
+            age={age}
+            referedBy={referedBy}
+            sex={sex}
+            PrintResult={
+              <Test
+                resultData={resultData}
+                changeResult={changeResultsHandler}
+                filterResult={filterResultHandler}
+              />
+            }
+          />
+        </div>
+      </FloatRight>
     </>
   )
 }

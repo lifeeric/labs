@@ -1,5 +1,6 @@
 import Reports from "../../../Models/reports";
 import { throwError, transformObjectToDocument } from "../../../Helper";
+import mongoose from "mongoose";
 
 export default {
   getReports: async (parent: any, args: any, context: any, info: any) => {
@@ -18,15 +19,26 @@ export default {
     /**
      * getting data from DB
      */
-    let fetchingReports = await Reports.find({ user: id });
-
-    /**
-     * search by patient_id, if patient_id is true, so filter it
-     */
-    // if (patient_id)
-    //   fetchingReports = fetchingReports.filter(
-    //     (report) => report.patient_id === patient_id
-    //   );
+    console.log(!!patient_id);
+    const p_id = patient_id;
+    let fetchingReports = await Reports.aggregate([
+      ...(p_id
+        ? [
+            {
+              $match: {
+                createdBy: mongoose.Types.ObjectId(id),
+                patient_id: p_id,
+              },
+            },
+          ]
+        : [
+            {
+              $match: {
+                createdBy: mongoose.Types.ObjectId(id),
+              },
+            },
+          ]),
+    ]);
 
     return transformObjectToDocument(fetchingReports, "getReportResult");
   },

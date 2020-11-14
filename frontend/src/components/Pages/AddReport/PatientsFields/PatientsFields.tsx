@@ -12,6 +12,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      boxSizing: "border-box",
+      width: "97%",
       margin: theme.spacing(2),
       paddingTop: theme.spacing(3),
     },
@@ -39,6 +41,8 @@ interface Props {
   ageHandler: (e: any) => void
   costHandler: (e: any) => void
   handleChange: (e: any) => void
+  PID: number
+  patientIdHandler: (e: any) => void
 }
 
 export const PatientsFields: React.FC<Props> = ({
@@ -52,12 +56,23 @@ export const PatientsFields: React.FC<Props> = ({
   referedByHandler,
   costHandler,
   handleChange,
+  PID,
+  patientIdHandler,
 }) => {
   const classes = useStyles()
 
   return (
     <Grid container spacing={2} className={classes.root}>
-      <Grid item xs={6} sm={3} className={classes.grid}>
+      <Grid item xs={6} sm={4} className={classes.grid}>
+        <Input
+          type="text"
+          placeholder="eg. 28329"
+          onChange={patientIdHandler}
+          label="Patient's ID (optional)"
+        />
+      </Grid>
+
+      <Grid item xs={6} sm={4} className={classes.grid}>
         <Input
           type="text"
           placeholder="Patient's name"
@@ -66,7 +81,7 @@ export const PatientsFields: React.FC<Props> = ({
         />
       </Grid>
 
-      <Grid item xs={6} sm={3} className={classes.grid}>
+      <Grid item xs={6} sm={4} className={classes.grid}>
         <Input
           type="text"
           label="Refered By"
@@ -75,7 +90,7 @@ export const PatientsFields: React.FC<Props> = ({
         />
       </Grid>
 
-      <Grid item xs={6} sm={3} className={classes.grid}>
+      <Grid item xs={6} sm={4} className={classes.grid}>
         <Input
           type="text"
           label="Age"
@@ -84,7 +99,7 @@ export const PatientsFields: React.FC<Props> = ({
         />
       </Grid>
 
-      <Grid item xs={6} sm={3} className={classes.grid}>
+      <Grid item xs={6} sm={4} className={classes.grid}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Sex</InputLabel>
           <Select

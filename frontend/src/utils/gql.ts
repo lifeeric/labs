@@ -203,3 +203,127 @@ export const GET_CHART_DATA = gql`
     }
   }
 `
+
+export const ADD_REPORT = gql`
+  mutation(
+    $id: ID!
+    $patient_id: Int
+    $patient_name: String!
+    $patient_age: Int!
+    $patient_sex: String!
+    $patient_referdby: String!
+    $date: String!
+    $price: Float!
+    $tests: [TESTS]!
+  ) {
+    addReport(
+      add: {
+        id: $id
+        patient_id: $patient_id
+        patient_name: $patient_name
+        patient_referedby: $patient_referdby
+        patient_age: $patient_age
+        patient_sex: $patient_sex
+        price: $price
+        date: $date
+        tests: $tests
+      }
+    ) {
+      __typename
+      ... on getReportResult {
+        id
+        patient_name
+        patient_referedby
+        patient_age
+        patient_sex
+        price
+        date
+        tests {
+          id
+          name
+          test {
+            test_name
+            normalRanges
+            unit
+            results
+          }
+        }
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const GET_REPORTS = gql`
+  query Get_Report($id: ID!, $patient_id: Int) {
+    getReports(id: $id, patient_id: $patient_id) {
+      __typename
+      ... on getReportResult {
+        id
+        patient_id
+        patient_name
+        patient_referedby
+        patient_age
+        patient_sex
+        price
+        date
+        tests {
+          id
+          name
+          test {
+            test_name
+            normalRanges
+            unit
+            results
+          }
+        }
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const GET_PROFIT = gql`
+  query Get_Profit($id: ID!, $date: String) {
+    getProfit(id: $id, date: $date) {
+      __typename
+      ... on GetLabProfit {
+        totalPrice
+        id {
+          date
+          _id
+        }
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const TOTAL_RECORDS = gql`
+  query Get_Reports($id: ID!) {
+    getTotalRecord(id: $id) {
+      __typename
+      ... on getTotalRecordResult {
+        level
+        totalTests
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`

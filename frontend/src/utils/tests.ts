@@ -1,4 +1,16 @@
-export const tests = [
+export interface ATest {
+  test_name: string
+  normalRanges: any[]
+  unit: string
+  results: string
+}
+export interface ITest {
+  id: number
+  name: string
+  test: ATest[]
+}
+
+export const tests: ITest[] = [
   {
     id: 3892831,
     name: "ALP",

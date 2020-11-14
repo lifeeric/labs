@@ -4,6 +4,10 @@ import { CircularProgressbar } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import styled from "styled-components"
 import { Divider } from "@material-ui/core"
+import { useQuery } from "@apollo/client"
+import { TOTAL_RECORDS } from "../../../../utils/gql"
+import { customHook } from "../../../../utils/customHook"
+import { Spinner } from "../../../UI/Spinner/Spinner"
 
 interface Props {}
 
@@ -58,28 +62,51 @@ const Line = styled.div`
 `
 
 export const Counter: React.FC<Props> = ({}) => {
-  const percentage = 66
+  const { currentUser } = customHook()
+  const { data, loading } = useQuery(TOTAL_RECORDS, {
+    variables: { id: currentUser._id },
+  })
+
+  const total = data && data.getTotalRecord.totalTests
+  const level = data && data.getTotalRecord.level
+
+  let percentage = 0
+  if (level === "Lv 1") percentage = (total / 50) * 100
+  if (level === "Lv 2") percentage = (total / 150) * 100
+  if (level === "Lv 3") percentage = (total / 300) * 100
+  if (level === "Lv 4") percentage = (total / 500) * 100
+  if (level === "Lv 5") percentage = (total / 1000) * 100
+
   return (
     <Container>
       <Box>
-        <Circle>
-          <CircularProgressbar
-            strokeWidth={3}
-            value={percentage}
-            text={`${percentage}%`}
-          />
-        </Circle>
-        <Divider />
-        <BottomLine>
-          <Level>
-            <p>Lv 1</p>
-          </Level>
-          <Line />
-          <Completed>
-            <span>Completed Tests</span>
-            50
-          </Completed>
-        </BottomLine>
+        {loading ? (
+          <Circle>
+            <Spinner loading={loading} />
+          </Circle>
+        ) : (
+          <>
+            <Circle>
+              <CircularProgressbar
+                strokeWidth={3}
+                value={percentage}
+                text={`${percentage}%`}
+              />
+            </Circle>
+
+            <Divider />
+            <BottomLine>
+              <Level>
+                <p>{level}</p>
+              </Level>
+              <Line />
+              <Completed>
+                <span>Completed Tests</span>
+                {total}
+              </Completed>
+            </BottomLine>
+          </>
+        )}
       </Box>
     </Container>
   )

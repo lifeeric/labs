@@ -22,7 +22,21 @@ const Report: Schema = new Schema(
     patient_sex: { type: String, required: true },
     price: { type: Number, required: true },
     date: Date,
-    user: {
+    tests: [
+      {
+        id: { type: Number, required: true },
+        name: { type: String, required: true },
+        test: [
+          {
+            test_name: { type: String, required: true },
+            normalRanges: [],
+            unit: String,
+            results: { type: String, required: true },
+          },
+        ],
+      },
+    ],
+    createdBy: {
       type: Schema.Types.ObjectId,
       ref: "Users",
     },

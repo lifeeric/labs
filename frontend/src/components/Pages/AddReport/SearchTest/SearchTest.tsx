@@ -7,8 +7,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     autocomplete: {
-        marginBottom: theme.spacing(4)
-    }
+      marginBottom: theme.spacing(4),
+    },
   })
 )
 
@@ -26,6 +26,8 @@ export const SearchTest: React.FC<Props> = ({ addResult, dropList }) => {
         id="combo-box-demo"
         onChange={(event, value) => addResult(value)}
         options={dropList}
+        clearText="TESTME"
+        closeText="TEST"
         getOptionLabel={option => option.name}
         style={{ width: 300 }}
         renderInput={params => (

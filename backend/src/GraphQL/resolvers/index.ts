@@ -7,10 +7,12 @@ import updatePassword from "./User/updatePass";
 import addExpenses from "./expenses/addExpenses";
 import getExpenses from "./expenses/getExpenses";
 import addTemplate from "./testTemplate/addTemplate";
-import reports from "./report/report";
+import addReport from "./report/report";
 import getReports from "./report/getReports";
 import updateUserSetting from "./User/updateUserSetting";
 import getChartData from "./expenses/getChartData";
+import { getProfit } from "./report/getProfit";
+import { getTotalRecords } from "./report/totalRecords";
 
 export default {
   Query: {
@@ -20,6 +22,8 @@ export default {
     ...getExpenses,
     ...getReports,
     ...getChartData,
+    ...getProfit,
+    ...getTotalRecords,
   },
   Mutation: {
     ...Users,
@@ -27,7 +31,7 @@ export default {
     ...updatePassword,
     ...addExpenses,
     ...addTemplate,
-    ...reports,
+    ...addReport,
     ...updateUserSetting,
   },
 };
