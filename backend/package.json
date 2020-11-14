@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "dev": "nodemon --exec ts-node --transpile-only src/server.ts",
     "dev2": "nodemon --exec ts-node --transpile-only src/server2.ts",
-    "build": "tsc -p ./build/server.js",
+    "build": "tsc -p .",
     "test": "jest"
   },
   "dependencies": {
