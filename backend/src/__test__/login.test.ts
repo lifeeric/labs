@@ -16,9 +16,9 @@ const axios_post = async (API: string, query: string) => {
 };
 
 describe("Getting login user", () => {
-  beforeAll(async () => {
-    await pExec(CMD_SEED_DB);
-  });
+  // beforeAll(async () => {
+  //   // await pExec(CMD_SEED_DB);
+  // });
 
   it("should retrieves the user data", async () => {
     const query = `
