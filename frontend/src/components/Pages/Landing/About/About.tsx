@@ -25,9 +25,11 @@ export const About: React.FC = () => {
                 businesses. At the moment, we're no-profit company under two
                 employee looker for engineer to folk this project.
               </p>
-              <Button type="primary" width="120px" shadow={true}>
-                Join Us
-              </Button>
+              <div className="about__center">
+                <Button type="primary" width="120px" shadow={true}>
+                  Join Us
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>

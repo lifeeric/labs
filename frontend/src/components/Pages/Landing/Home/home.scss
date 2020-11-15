@@ -53,6 +53,12 @@
     width: 400px;
     margin-left: 150px;
   }
+
+  // center
+  &__center {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1100px) {

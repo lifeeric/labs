@@ -10,6 +10,7 @@ interface Props {
   shadow?: boolean
   btnType?: boolean
   isLoading?: boolean
+  onClick?: () => void
 }
 
 interface StyleProps {
@@ -70,6 +71,7 @@ export const ButtonComp: React.FC<Props> = ({
   width,
   btnType,
   isLoading,
+  onClick,
 }) => {
   return (
     <Width width={width}>
@@ -78,6 +80,7 @@ export const ButtonComp: React.FC<Props> = ({
           primary={type}
           type={btnType ? "submit" : "nosubmit"}
           shadow={shadow}
+          onClick={onClick}
         >
           {isLoading ? <Spinner /> : children}
         </Button>

@@ -1,6 +1,7 @@
 import * as React from "react"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { NavbarItem, NavbarLink } from "./NavbarItem/NavbarItem"
+import { navigate } from "gatsby"
 
 import "./Navbar.scss"
 
@@ -28,7 +29,7 @@ export const Navbar: React.FC<Props> = ({ sideDrawer }) => {
     {
       text: "Contact",
       offset: -70,
-      to: "contact",
+      to: "https://ericgit.me/#contact",
     },
   ]
 
@@ -47,7 +48,7 @@ export const Navbar: React.FC<Props> = ({ sideDrawer }) => {
           <ul className="nav__list">
             <NavbarLink to="/app/login" text="Log In" />
             <li className="nav__item item--button">
-              <Button type="primary" width="100px">
+              <Button type="primary" width="100px" onClick={registerHandler}>
                 Sign Up
               </Button>
             </li>
@@ -56,4 +57,8 @@ export const Navbar: React.FC<Props> = ({ sideDrawer }) => {
       </ul>
     </nav>
   )
+}
+
+export const registerHandler = () => {
+  navigate("/app/login")
 }

@@ -13,6 +13,11 @@
   // about
   &__about {
     padding-right: 15px;
+    color: $color--footer-links;
+  }
+
+  .footer--margin {
+    margin-right: 80px;
   }
 
   // rows
@@ -78,6 +83,10 @@
     // about
     &__about {
       width: 100% !important;
+    }
+
+    .footer--margin {
+      margin-right: 0;
     }
 
     // row

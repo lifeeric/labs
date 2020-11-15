@@ -1,7 +1,7 @@
 import * as React from "react"
-import { ButtonComp as Button } from "../../../UI/Button/Button"
+// import { ButtonComp as Button } from "../../../UI/Button/Button"
 import { Link } from "gatsby"
-import { AiOutlineTwitter } from "react-icons/ai"
+// import { AiOutlineTwitter } from "react-icons/ai"
 import { LinkItem } from "./LinkItem"
 
 import "./Footer.scss"
@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
   const contact = [
     {
       text: "Contact",
-      to: "",
+      to: "https://ericgit.me/#contact",
     },
     {
       text: "Support",
@@ -21,16 +21,16 @@ export const Footer: React.FC = () => {
     },
   ]
 
-  const resources = [
-    {
-      text: "Partner",
-      to: "",
-    },
-    {
-      text: "API",
-      to: "",
-    },
-  ]
+  // const resources = [
+  //   {
+  //     text: "Partner",
+  //     to: "",
+  //   },
+  //   {
+  //     text: "API",
+  //     to: "",
+  //   },
+  // ]
 
   const company = [
     {
@@ -48,11 +48,11 @@ export const Footer: React.FC = () => {
       offset: -70,
       to: "about",
     },
-    {
-      text: "Careers",
-      offset: -70,
-      to: "/",
-    },
+    // {
+    //   text: "Careers",
+    //   offset: -70,
+    //   to: "/",
+    // },
   ]
 
   const legal = [
@@ -70,16 +70,15 @@ export const Footer: React.FC = () => {
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__row">
-          <div className="footer__cols">
+          <div className="footer__cols footer--margin">
             <div className="footer__wrapper">
               <h1 className="footer__title">BIO</h1>
               <p className="footer__about">
-                We’re currently looking for developer to help us in this open
-                source poject
+                Non-profit at the moment, helping owners to provide technology.
+                Every problem is a gift — without problems we would not grow. so
+                send us an email to add new features if you have a good enough
+                idea!
               </p>
-              <Button type="secondary" shadow={true} width="100px">
-                Join
-              </Button>
             </div>
           </div>
 
@@ -94,7 +93,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="footer__cols">
+          {/* <div className="footer__cols">
             <div className="footer__wrapper">
               <h5 className="footer__header">Resources</h5>
               <ul className="footer__links">
@@ -103,7 +102,7 @@ export const Footer: React.FC = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
 
           <div className="footer__cols">
             <div className="footer__wrapper">
@@ -128,7 +127,12 @@ export const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="footer__divider">copyright &copy; 2020</div>
+      <div className="footer__divider">
+        copyright &copy; 2020, build with love by{" "}
+        <Link to="https://ericgit.me" target="_blank">
+          ericgit.me.
+        </Link>
+      </div>
     </footer>
   )
 }

@@ -2,6 +2,7 @@ import * as React from "react"
 import { RowComp as Row, ColComp as Col } from "../../../UI/Col/Col"
 import { ButtonComp as Button } from "../../../UI/Button/Button"
 import LabIcon from "../../../../images/concepthome.inline.svg"
+import { registerHandler } from "../Navbar/Navbar"
 
 import "./home.scss"
 
@@ -19,9 +20,16 @@ export default () => {
                   Manage all your labs work in one place, no more hard writing,
                   no worries about data storing, monitor everything around you!
                 </p>
-                <Button type="secondary" width="120px" shadow={true}>
-                  Try for Free
-                </Button>
+                <div className="landing__center">
+                  <Button
+                    type="secondary"
+                    width="120px"
+                    shadow={true}
+                    onClick={registerHandler}
+                  >
+                    Try for Free
+                  </Button>
+                </div>
               </div>
             </Col>
             <Col>

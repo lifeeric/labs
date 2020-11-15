@@ -11,6 +11,8 @@ interface Props {
 }
 
 export const NavbarItem: React.FC<Props> = ({ text, to, offset }) => {
+  if (to === "https://ericgit.me/#contact")
+    return <NavbarLink to={to} text={text} />
   return (
     <li className="nav__item">
       <LinkAni
@@ -30,6 +32,8 @@ export const NavbarItem: React.FC<Props> = ({ text, to, offset }) => {
 
 export const NavbarLink: React.FC<Props> = ({ to, text }) => (
   <li className="nav__item">
-    <Link to={to}>{text}</Link>
+    <Link className="nav__link" to={to} target="_blank">
+      {text}
+    </Link>
   </li>
 )
