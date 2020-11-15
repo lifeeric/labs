@@ -6,15 +6,18 @@ import { GET_USER_SETTING, UPDATE_USER_SETTING } from "../../../../utils/gql"
 import { useQuery, useMutation } from "@apollo/client"
 import { customHook } from "../../../../utils/customHook"
 import { useForm } from "react-hook-form"
+import { IRefered } from "../User/User"
 
 interface Props {
   openSnackbarHandler: (msg: string) => void
   statusHandler: (message: string) => void
+  setRefered: (user: IRefered[]) => void
 }
 
 export const Account: React.FC<Props> = ({
   openSnackbarHandler,
   statusHandler,
+  setRefered,
 }) => {
   const { currentUser } = customHook()
   const { register, handleSubmit, watch, errors, reset } = useForm()
@@ -33,6 +36,7 @@ export const Account: React.FC<Props> = ({
     ) {
       openSnackbarHandler("Profile has changed successfully!")
       statusHandler("success")
+      setRefered(update_data.updateUserSetting.refered)
     }
   }, [update_data])
 

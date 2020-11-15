@@ -80,6 +80,9 @@ export const GET_USER_SETTING = gql`
         name
         email
         company
+        refered {
+          name
+        }
       }
       ... on Error {
         error

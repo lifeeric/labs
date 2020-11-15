@@ -22,8 +22,6 @@ export default {
      * Generate jwt token for passwrod resetting
      */
 
-    console.log(doesEmailExist);
-
     const key = doesEmailExist.password + "-" + doesEmailExist.createdAt;
     const token = jwtHelper(email, doesEmailExist, key, 3600);
 
@@ -44,15 +42,5 @@ export default {
         message: "Email has been sent with the rest link",
       };
     });
-
-    /**
-     * send data as response
-     */
-    // return {
-    //   __typename: "ForgetPassordResult",
-    //   id: doesEmailExist._id,
-    //   email,
-    //   token,
-    // };
   },
 };

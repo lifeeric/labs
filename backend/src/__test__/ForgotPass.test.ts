@@ -3,10 +3,10 @@ import axios from "axios";
 import { exec } from "child_process";
 import path from "path";
 
-const pExec = util.promisify(exec);
+// const pExec = util.promisify(exec);
 
 const API = "http://localhost:8000/graphql";
-const CMD_SEED_DB = path.join(__dirname, "/../../dataset.sh");
+// const CMD_SEED_DB = path.join(__dirname, "/../../dataset.sh");
 
 // Invoke axios
 const axios_post = async (API: string, query: string) => {

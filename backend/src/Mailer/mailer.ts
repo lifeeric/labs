@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
-
 // async..await is not allowed in global scope, must use a wrapper
 export default async function main(to: string, subject: string, html: string) {
-  console.log("mailer =>");
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   // let testAccount = await nodemailer.createTestAccount();
@@ -13,8 +11,8 @@ export default async function main(to: string, subject: string, html: string) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "rcobb2@mail.ccsf.edu", // generated ethereal user
-      pass: "N!ceHurt", // generated ethereal password
+      user: process.env.user, // generated ethereal user
+      pass: process.env.key, // generated ethereal password
     },
   });
 

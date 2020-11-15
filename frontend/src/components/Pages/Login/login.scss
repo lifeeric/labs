@@ -3,11 +3,15 @@
 .login {
   width: 100%;
   box-sizing: border-box;
+  background-color: #f2f2f2;
+  height: 100vh;
+  margin-top: -20px;
 
   // greeting
   &__greeting {
     text-align: center;
     color: $text--black;
+    padding-top: 40px;
   }
 
   // container
@@ -23,6 +27,7 @@
     box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
   }
 
   // tab

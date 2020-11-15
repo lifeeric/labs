@@ -8,8 +8,12 @@ import { Account } from "../Account/Account"
 import { Hpasswd } from "../Hpasswd/Hpasswd"
 
 interface Props {}
+export interface IRefered {
+  name: string
+}
 
 export const User: React.FC<Props> = ({}) => {
+  const [referedUser, setReferedUser] = useState<IRefered[]>()
   const [snackbar, setSnackbar] = useState<boolean>(false)
   const [message, setMessage] = useState<string>("Link copied to clipboard!")
   const [status, setStatus] = useState<string>("")
@@ -23,7 +27,9 @@ export const User: React.FC<Props> = ({}) => {
     setStatus(message)
   }
 
-  console.log(snackbar, " User.tsx")
+  const setReferedUserHandler = (users: IRefered[]): void => {
+    setReferedUser(users)
+  }
 
   useEffect(() => {
     snackbar &&
@@ -41,6 +47,7 @@ export const User: React.FC<Props> = ({}) => {
             <Account
               openSnackbarHandler={openSnackbarHandler}
               statusHandler={statusHandler}
+              setRefered={setReferedUserHandler}
             />
           </div>
           <div className="user__split">
@@ -51,7 +58,7 @@ export const User: React.FC<Props> = ({}) => {
           </div>
         </div>
       </Box>
-      <Refers openSnackbarHandler={openSnackbarHandler} />
+      <Refers openSnackbarHandler={openSnackbarHandler} refered={referedUser} />
       <Snackbar
         text={message}
         state={status}
