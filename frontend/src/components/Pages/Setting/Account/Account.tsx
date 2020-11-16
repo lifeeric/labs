@@ -7,17 +7,20 @@ import { useQuery, useMutation } from "@apollo/client"
 import { customHook } from "../../../../utils/customHook"
 import { useForm } from "react-hook-form"
 import { IRefered } from "../User/User"
+import { ImageUploader } from "../ImageUploader/ImageUploader"
 
 interface Props {
   openSnackbarHandler: (msg: string) => void
   statusHandler: (message: string) => void
   setRefered: (user: IRefered[]) => void
+  setReferedID: (id: number) => void
 }
 
 export const Account: React.FC<Props> = ({
   openSnackbarHandler,
   statusHandler,
   setRefered,
+  setReferedID,
 }) => {
   const { currentUser } = customHook()
   const { register, handleSubmit, watch, errors, reset } = useForm()
@@ -29,6 +32,12 @@ export const Account: React.FC<Props> = ({
     UPDATE_USER_SETTING
   )
 
+  // add referd users, and refered id
+  if (data) {
+    setRefered(data.userSetting.refered)
+    setReferedID(data.userSetting.id)
+  }
+
   useEffect(() => {
     if (
       update_data &&
@@ -36,7 +45,6 @@ export const Account: React.FC<Props> = ({
     ) {
       openSnackbarHandler("Profile has changed successfully!")
       statusHandler("success")
-      setRefered(update_data.updateUserSetting.refered)
     }
   }, [update_data])
 
@@ -69,6 +77,7 @@ export const Account: React.FC<Props> = ({
 
   return (
     <>
+      <ImageUploader />
       <div className="user__info">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input

@@ -44,12 +44,6 @@
     bottom: -50px;
     z-index: -1;
   }
-
-  // center
-  &__center {
-    display: flex;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 1100px) {
@@ -58,6 +52,12 @@
     &__banner {
       margin: 50px auto 0;
       text-align: center;
+    }
+
+    // center
+    &__center {
+      display: flex;
+      justify-content: center;
     }
 
     // explain

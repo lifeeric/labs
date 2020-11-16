@@ -40,7 +40,7 @@
   // title
   &__title {
     font-size: 80px;
-    font-weight: 900;
+    font-weight: 800;
   }
 
   &__explain {
@@ -53,12 +53,6 @@
     width: 400px;
     margin-left: 150px;
   }
-
-  // center
-  &__center {
-    display: flex;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 1100px) {
@@ -66,6 +60,12 @@
     // lab image
     &__labimage {
       margin: auto !important;
+    }
+
+    // center
+    &__center {
+      display: flex;
+      justify-content: center;
     }
 
     // background iamge

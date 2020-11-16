@@ -2122,6 +2122,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-helmet@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.0.tgz#af586ed685f4905e2adc7462d1d65ace52beee7a"
+  integrity sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-lottie@^1.2.5":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.5.tgz#659322961de534227ba354109342cad967d98841"
@@ -4110,6 +4117,19 @@ clone-response@1.0.2, clone-response@^1.0.2:
   integrity sha1-0dyXOSAxTfZ/vrlCI7TuNQI56Ws=
   dependencies:
     mimic-response "^1.0.0"
+
+cloudinary-core@^2.11.3:
+  version "2.11.3"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.11.3.tgz#1440f61c6280485094aac87021b7e10f746dc69e"
+  integrity sha512-ZRnpjSgvx+LbSf+aEz5NKzxDB4Z0436aY/0BSDa90kAHiwAyd84VyEi95I74SE80e15Ri9t5S2xtksTXpzk9Xw==
+
+cloudinary-react@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/cloudinary-react/-/cloudinary-react-1.6.7.tgz#13a8c8660a36377edbc2482cdc7f061a12d60b19"
+  integrity sha512-u7Mx2CWEPG7Iy/3jn+JcvYu50uHwem4XokveNDqdnoeBJwit2B/ccfUtOUbpSfKAaEKLxXuPcQR5H8FEpIoavw==
+  dependencies:
+    cloudinary-core "^2.11.3"
+    prop-types "^15.6.2"
 
 clsx@^1.0.4, clsx@^1.1.0:
   version "1.1.1"

@@ -3,9 +3,13 @@
 .content {
   margin-left: 60px;
   margin-top: 0px !important;
-  height: 100%;
-  overflow: hidden;
+
   background: $bg--dashboard;
+
+  &__container {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 @media (min-width: 1025px) {
