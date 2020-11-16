@@ -7,7 +7,6 @@ import { useQuery, useMutation } from "@apollo/client"
 import { customHook } from "../../../../utils/customHook"
 import { useForm } from "react-hook-form"
 import { IRefered } from "../User/User"
-import { ImageUploader } from "../ImageUploader/ImageUploader"
 
 interface Props {
   openSnackbarHandler: (msg: string) => void
@@ -77,7 +76,6 @@ export const Account: React.FC<Props> = ({
 
   return (
     <>
-      <ImageUploader />
       <div className="user__info">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
