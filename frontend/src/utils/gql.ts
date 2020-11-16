@@ -77,6 +77,7 @@ export const GET_USER_SETTING = gql`
     userSetting(id: $id) {
       __typename
       ... on GetUserSettingResult {
+        id
         name
         email
         company

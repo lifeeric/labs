@@ -7,5 +7,9 @@ interface Props {
 }
 
 export const MainContent: React.FC<Props> = ({ children }) => {
-  return <div className="content">{children}</div>
+  return (
+    <div className="content">
+      <div className="content__container">{children}</div>
+    </div>
+  )
 }

@@ -5,6 +5,8 @@ import Img from "gatsby-image"
 import { Form } from "./Form/form"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { Snackbar } from "../../UI/Snackbar/Snackbar"
+import { parse } from "query-string"
+import { useLocation } from "@reach/router"
 
 import "react-tabs/style/react-tabs.css"
 import "./login.scss"
@@ -14,12 +16,12 @@ type Props = {
 }
 
 export const Login: React.FC<Props> = () => {
+  const reflink = parse(location.search).ref
   const [setupForm, setSetupForm] = useState<string>("login")
   const [status, setStatus] = useState<string>()
   const [message, setMessage] = useState<string>("")
   const [snackbar, setSnackbar] = useState<boolean | undefined>(undefined)
 
-  console.log(snackbar, " Login started rendered")
   useEffect(() => {
     if (!snackbar) return
     setTimeout(() => {
@@ -50,7 +52,6 @@ export const Login: React.FC<Props> = () => {
     setMessage(msg)
     setSnackbar(true)
     setStatus(status || "danger")
-    console.log(msg, " Snackbar")
   }
   const closeSnackbarHandler = (): void => setSnackbar(false)
 
@@ -86,6 +87,7 @@ export const Login: React.FC<Props> = () => {
                     isForm={setupForm}
                     formData={registerUser}
                     buttonLabel="Register"
+                    referedLink={reflink}
                   />
                 </TabPanel>
               </div>

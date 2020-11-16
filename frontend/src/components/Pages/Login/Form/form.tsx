@@ -16,6 +16,7 @@ type Props = {
   isForm: string | null
   buttonLabel: string
   openSnackbar: (msg: string, status?: string) => void
+  referedLink?: string | string[] | null
 }
 
 export const Form: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const Form: React.FC<Props> = ({
   isForm,
   buttonLabel,
   openSnackbar,
+  referedLink,
 }) => {
   const [getUser, setUser] = useLocalStorage()
   const [getLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY, {
@@ -32,7 +34,6 @@ export const Form: React.FC<Props> = ({
     REGISTER_USER
   )
   const { register, handleSubmit, watch, reset } = useForm()
-
   useEffect(() => {
     if (data && data.login.__typename === "LoginUserResult") {
       login(data.login)
@@ -66,6 +67,7 @@ export const Form: React.FC<Props> = ({
           name: fdata["Full Name"],
           email: fdata["Your Email"],
           password: fdata.Password,
+          referedBy: referedLink,
         },
       })
   }
@@ -75,13 +77,6 @@ export const Form: React.FC<Props> = ({
       {formData.map((ld: any) => (
         <Input key={ld.label} register={register} {...ld} />
       ))}
-
-      {/* {loginStatus && (
-        <Warning
-          message={String(loginStatus?.message)}
-          log={loginStatus.error}
-        />
-      )} */}
 
       <Button
         btnType={true}

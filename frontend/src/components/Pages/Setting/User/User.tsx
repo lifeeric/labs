@@ -14,13 +14,16 @@ export interface IRefered {
 
 export const User: React.FC<Props> = ({}) => {
   const [referedUser, setReferedUser] = useState<IRefered[]>()
+  const [referedID, setReferedID] = useState<number>()
   const [snackbar, setSnackbar] = useState<boolean>(false)
   const [message, setMessage] = useState<string>("Link copied to clipboard!")
   const [status, setStatus] = useState<string>("")
+
   const openSnackbarHandler = (msg: string = ""): void => {
     msg && setMessage(msg)
     setSnackbar(true)
   }
+
   const closeSnackbarHandler = (): void => setSnackbar(false)
 
   const statusHandler = (message: string): void => {
@@ -29,6 +32,10 @@ export const User: React.FC<Props> = ({}) => {
 
   const setReferedUserHandler = (users: IRefered[]): void => {
     setReferedUser(users)
+  }
+
+  const setReferdIDHandler = (id: number): void => {
+    setReferedID(id)
   }
 
   useEffect(() => {
@@ -48,6 +55,7 @@ export const User: React.FC<Props> = ({}) => {
               openSnackbarHandler={openSnackbarHandler}
               statusHandler={statusHandler}
               setRefered={setReferedUserHandler}
+              setReferedID={setReferdIDHandler}
             />
           </div>
           <div className="user__split">
@@ -58,7 +66,11 @@ export const User: React.FC<Props> = ({}) => {
           </div>
         </div>
       </Box>
-      <Refers openSnackbarHandler={openSnackbarHandler} refered={referedUser} />
+      <Refers
+        openSnackbarHandler={openSnackbarHandler}
+        refered={referedUser}
+        referedID={referedID}
+      />
       <Snackbar
         text={message}
         state={status}
