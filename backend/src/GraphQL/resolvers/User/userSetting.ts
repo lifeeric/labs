@@ -21,11 +21,12 @@ export default {
     const userData = await Users.findById(id).populate("refered");
 
     /**
-     *
+     * return response
      */
     return {
       __typename: "GetUserSettingResult",
       ...userData?._doc,
+      id: userData?.id,
       company: userData?.company && userData.company,
     };
   },

@@ -27,6 +27,7 @@ export default gql`
   union UserSettingUnion = GetUserSettingResult | Error
 
   type GetUserSettingResult {
+    id: ID!
     name: String!
     email: String!
     company: String
