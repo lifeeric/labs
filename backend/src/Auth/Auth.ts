@@ -9,7 +9,7 @@ const privateKey = fs.readFileSync(
 
 export default (request: any, key = privateKey) => {
   const header = request.req.headers.authorization;
-// console.log(header, ' Header') there is error
+  // console.log(header, ' Header') there is error
   // header not found
   if (!header)
     return {
@@ -47,5 +47,6 @@ export default (request: any, key = privateKey) => {
   return {
     isAuth: true,
     userId: decodeToken.userId,
+    isAdmin: decodeToken.isAdmin,
   };
 };

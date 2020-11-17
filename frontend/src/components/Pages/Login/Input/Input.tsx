@@ -10,6 +10,7 @@ type Inputs = {
   type?: string
   value?: string
   onChange?: (e: any) => any
+  refInput?: HTMLInputElement | React.RefObject<HTMLInputElement>
 }
 
 export const Input: React.FC<Inputs> = ({
@@ -20,6 +21,7 @@ export const Input: React.FC<Inputs> = ({
   required = false,
   value,
   onChange,
+  refInput,
 }) => {
   return (
     <div className="login__textfield">
@@ -29,7 +31,7 @@ export const Input: React.FC<Inputs> = ({
         type={type}
         defaultValue={value}
         placeholder={placeholder}
-        ref={register && register({ required: required })}
+        ref={refInput || (register && register({ required: required }))}
         name={label}
         onChange={onChange}
       />

@@ -14,6 +14,7 @@ export default gql`
     _id: ID!
     email: String!
     token: String!
+    isAdmin: Boolean
   }
 
   # union ForgotPassUnion = ForgetPassordResult | Error

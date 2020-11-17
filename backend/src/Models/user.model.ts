@@ -9,6 +9,7 @@ export interface IUser extends Document {
   _doc: any;
   createdAt: string;
   id: any;
+  isAdmin: boolean;
 }
 
 const userSchema: Schema = new Schema(
@@ -18,6 +19,7 @@ const userSchema: Schema = new Schema(
     company: { type: String, required: false },
     refered: [{ type: Schema.Types.ObjectId, ref: "Users" }],
     password: { type: String, required: true },
+    isAdmin: Boolean,
   },
   {
     timestamps: true,

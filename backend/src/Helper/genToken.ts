@@ -17,6 +17,7 @@ export default (
     {
       userId: user._id,
       email,
+      isAdmin: user.isAdmin || false,
     },
     secretKey,
     {

@@ -1,5 +1,6 @@
 import Report from "../../../Models/reports";
 import { throwError } from "../../../Helper/";
+import mongoose from "mongoose";
 
 export const getTotalRecords = {
   getTotalRecord: async (parent: any, args: any, context: any, info: any) => {
@@ -20,7 +21,10 @@ export const getTotalRecords = {
     let userLevel = "Lv 1";
 
     const foundResult = await Report.countDocuments({
-      date: { $gt: new Date("01/01/2020") },
+      $and: [
+        { createdBy: mongoose.Types.ObjectId(id) },
+        { date: { $gt: new Date("01/01/2020") } },
+      ],
     });
 
     /**

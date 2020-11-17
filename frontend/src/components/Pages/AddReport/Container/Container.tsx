@@ -11,6 +11,7 @@ import ReactToPrint from "react-to-print"
 import { useMutation } from "@apollo/client"
 import { ADD_REPORT } from "../../../../utils/gql"
 import { customHook } from "../../../../utils/customHook"
+import { useSnackbar } from "notistack"
 
 /**
  * Styled Compoennts
@@ -33,28 +34,34 @@ const Center = styled.div`
 `
 
 interface IPatient {
-  name: string
-  referedby: string
-  sex: string
+  name: string | undefined
+  referedby: string | undefined
   age: number
-  date: string
+  pid: string | undefined
+  sex: string
 }
 export const Container: React.FC<Props> = ({}) => {
-  const [resultData, setResultData] = useState<ITest[]>([])
-  const [patientData, setPatientData] = useState<IPatient | undefined>()
-  const componentRef = useRef<any>()
-  const [sex, setSex] = React.useState("")
-  const [name, setName] = useState<string>("")
-  const [referedBy, setReferedBy] = useState<string>("")
-  const [age, setAge] = useState<string>("")
-  const [PID, setPID] = useState<number>()
-  const [cost, setCost] = useState<string>("")
+  const [reportResultData, setReportResultData] = useState<ITest[]>([])
+  const [patientData, setPatientData] = useState<
+    React.SetStateAction<IPatient>
+  >()
   const [addReport, { data, loading }] = useMutation(ADD_REPORT)
   const { currentUser } = customHook()
+  const componentRef = useRef(null)
+  const [sex, setSex] = useState<string>("")
+  const nameRef = useRef<HTMLInputElement>(null)
+  const referedByRef = useRef<HTMLInputElement>(null)
+  const ageRef = useRef<HTMLInputElement>(null)
+  const PIDRef = useRef<HTMLInputElement>(null)
+  const costRef = useRef<HTMLInputElement>(null)
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
-  const addResultHandler = (value: any) => {
+  const addNewReportHandler = (value: any) => {
     if (!value) return
-    setResultData((resultData: ITest[]) => [...resultData, value])
+    setReportResultData((reportResultData: ITest[]) => [
+      ...reportResultData,
+      value,
+    ])
   }
 
   const changeResultsHandler = (
@@ -62,19 +69,23 @@ export const Container: React.FC<Props> = ({}) => {
     id: number,
     index: number
   ) => {
-    const newValue = e.target.value
-    const newResults = [...resultData[id].test]
-    newResults[index].results = newValue
-    const newData = [...resultData]
-    newData[id].test = newResults
-    setResultData(newData)
+    const value = e.target.value
+    const oldResults = [...JSON.parse(JSON.stringify(reportResultData))]
+    const oldTestsR = [...oldResults[id].test]
+
+    oldTestsR[index].results = value
+    oldResults[id].test = oldTestsR
+    console.log(oldResults, typeof value, " =>")
+
+    // oldResults[id].test[index] = reports
+    setReportResultData(oldResults)
   }
 
   const filterResultHandler = (id: number) => {
-    const oldResultData: ITest[] = [...resultData]
+    const oldResultData: ITest[] = [...reportResultData]
 
     const newResultData = oldResultData.filter(data => data.id !== id)
-    setResultData(newResultData)
+    setReportResultData(newResultData)
   }
 
   const printOut = () => {
@@ -85,75 +96,93 @@ export const Container: React.FC<Props> = ({}) => {
     )
   }
 
-  /**
-   * Patient Data
-   */
-  const patientIdHandler = (e: any): void => {
-    const name = e.target.value
-    setPID(name)
-  }
-
-  const nameHandler = (e: any): void => {
-    const name = e.target.value
-    setName(name)
-  }
-
-  const referedByHandler = (e: any): void => {
-    const name = e.target.value
-    setReferedBy(name)
-  }
-
-  const ageHandler = (e: any): void => {
-    const name = e.target.value
-    setAge(name)
-  }
-
-  const costHandler = (e: any): void => {
-    const name = e.target.value
-    setCost(name)
-  }
-
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSex(event.target.value as string)
-  }
   const submitHandler = () => {
+    const name = nameRef?.current?.value
+    const age = ageRef?.current?.value
+    const referedBy = referedByRef?.current?.value
+    const cost = costRef.current?.value
+    const PID = PIDRef.current?.value
+
+    /**
+     * Empty validating
+     */
+    if (!name || !age || !referedBy || !cost || !reportResultData.length) {
+      enqueueSnackbar("All Fields are required", { variant: "error" })
+      return
+    }
+
+    // removing unnessassary fields
+    const newReportOfUser = reportResultData.map(rs => ({
+      id: rs.id,
+      name: rs.name,
+      test: rs.test.map(ts => ({
+        test_name: ts.test_name,
+        results: ts.results,
+        normalRanges: ts.normalRanges,
+        unit: ts.unit,
+      })),
+    }))
+
     addReport({
       variables: {
         id: currentUser._id,
-        patient_id: "",
+        patient_id: Number(PID),
         patient_name: name,
         patient_age: Number(age),
         patient_sex: sex,
-        patient_referdby: referedBy,
+        patient_referedby: referedBy,
         date: new Date().toISOString(),
         price: Number(cost),
-        tests: resultData,
+        tests: newReportOfUser,
       },
     })
+  }
+
+  React.useEffect(() => {
+    if (!data) return
+    enqueueSnackbar("Report Successfully Added!", { variant: "success" })
+
+    // removing data
+    setReportResultData([])
+  }, [data])
+
+  const sexHandler = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    setSex(event.target.value as string)
+  }
+
+  const collectPatientDataHandler = () => {
+    const name = nameRef.current?.value
+    const rf = referedByRef.current?.value
+    const age = ageRef.current?.value
+    const pid = PIDRef.current?.value
+
+    const patient = {
+      name,
+      referedby: rf,
+      age: Number(age),
+      pid,
+      sex,
+    }
+
+    setPatientData(patient)
   }
 
   return (
     <>
       <PatientsFields
-        nameHandler={nameHandler}
-        referedByHandler={referedByHandler}
-        ageHandler={ageHandler}
-        costHandler={costHandler}
-        handleChange={handleChange}
-        name={name}
-        age={age}
-        referedBy={referedBy}
-        sex={sex}
-        cost={cost}
-        PID={PID}
-        patientIdHandler={patientIdHandler}
+        nameRef={nameRef}
+        ageRef={ageRef}
+        referedByRef={referedByRef}
+        costRef={costRef}
+        PIDRef={PIDRef}
+        sexHandler={sexHandler}
       />
       <Divider />
       <Center>
-        <SearchTest addResult={addResultHandler} dropList={tests} />
+        <SearchTest addNewReport={addNewReportHandler} />
       </Center>
       <Test
-        resultData={resultData}
+        resultData={reportResultData}
         changeResult={changeResultsHandler}
         filterResult={filterResultHandler}
       />
@@ -163,19 +192,19 @@ export const Container: React.FC<Props> = ({}) => {
         <ReactToPrint
           trigger={printOut}
           content={() => componentRef.current}
+          onBeforeGetContent={collectPatientDataHandler}
+          onAfterPrint={collectPatientDataHandler}
+
           // pageStyle={style}
         />
         <div style={{ display: "none" }}>
           <ComponentToPrint
             ref={componentRef}
-            //   data={patientData}
-            name={name}
-            age={age}
-            referedBy={referedBy}
+            {...patientData}
             sex={sex}
             PrintResult={
               <Test
-                resultData={resultData}
+                resultData={reportResultData}
                 changeResult={changeResultsHandler}
                 filterResult={filterResultHandler}
               />

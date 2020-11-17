@@ -2,7 +2,6 @@ import dateISO from "./date";
 import { Types } from "mongoose";
 
 export default (object: any, type: string) => {
-  console.log();
   return object.map((obj: any) => ({
     __typename: type,
     ...(obj._doc ? obj._doc : obj),

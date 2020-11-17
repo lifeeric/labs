@@ -10,6 +10,7 @@ import { ApolloProvider, ApolloClient, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { cache, stateVar } from "./src/utils/cache"
 import fetch from "isomorphic-fetch"
+import { SnackbarProvider } from "notistack"
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3000/graphql",
@@ -36,5 +37,7 @@ const client = new ApolloClient({
 })
 
 export const wrapRootElement = ({ element }) => (
-  <ApolloProvider client={client}>{element}</ApolloProvider>
+  <ApolloProvider client={client}>
+    <SnackbarProvider maxSnack={3}>{element}</SnackbarProvider>
+  </ApolloProvider>
 )

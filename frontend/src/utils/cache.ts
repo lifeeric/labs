@@ -17,11 +17,13 @@ export const cache = new InMemoryCache({
 
 export const stateVar = makeVar({
   sidebar: false,
+  tests: [],
   currentUser: {
     _id: "",
     email: "",
     name: "",
     token: "",
+    isAdmin: false,
   },
 })
 

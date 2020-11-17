@@ -8,6 +8,7 @@ export const LOGIN_QUERY = gql`
         _id
         email
         token
+        isAdmin
       }
 
       ... on Error {
@@ -215,7 +216,7 @@ export const ADD_REPORT = gql`
     $patient_name: String!
     $patient_age: Int!
     $patient_sex: String!
-    $patient_referdby: String!
+    $patient_referedby: String!
     $date: String!
     $price: Float!
     $tests: [TESTS]!
@@ -225,7 +226,7 @@ export const ADD_REPORT = gql`
         id: $id
         patient_id: $patient_id
         patient_name: $patient_name
-        patient_referedby: $patient_referdby
+        patient_referedby: $patient_referedby
         patient_age: $patient_age
         patient_sex: $patient_sex
         price: $price
@@ -324,6 +325,51 @@ export const TOTAL_RECORDS = gql`
         totalTests
       }
 
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const GET_TEST_TEMPLATE = gql`
+  query Get_Test_Template($id: ID!) {
+    getTestTemplate(id: $id) {
+      __typename
+      ... on GenTemplateResult {
+        id
+        name
+        test {
+          test_name
+          results
+          normalRanges
+          unit
+        }
+      }
+
+      ... on Error {
+        error
+        message
+      }
+    }
+  }
+`
+
+export const CREATE_TEST_TEMPLATE = gql`
+  mutation($name: String!, $test: [ATest]!) {
+    generateTemplate(add: { name: $name, test: $test }) {
+      __typename
+      ... on GenTemplateResult {
+        id
+        name
+        test {
+          test_name
+          results
+          unit
+          normalRanges
+        }
+      }
       ... on Error {
         error
         message

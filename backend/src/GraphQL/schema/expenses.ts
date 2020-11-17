@@ -4,6 +4,7 @@ export default gql`
   extend type Query {
     getExpenses(id: ID!): [getExpensesUnion]!
     getChartData(id: ID!, date: String!): [GetChartUnion]!
+    downloadTemplates(): String
   }
 
   union getExpensesUnion = GetExpensesResult | Error

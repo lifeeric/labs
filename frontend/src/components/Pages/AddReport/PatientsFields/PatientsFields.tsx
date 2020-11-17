@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core"
 import * as React from "react"
-import { useState } from "react"
+import { useState, RefObject } from "react"
 import { Input } from "../../Login/Input/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -31,33 +31,21 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface Props {
-  sex: string
-  name: string
-  referedBy: string
-  age: string
-  cost: string
-  nameHandler: (e: any) => void
-  referedByHandler: (e: any) => void
-  ageHandler: (e: any) => void
-  costHandler: (e: any) => void
-  handleChange: (e: any) => void
-  PID: number
-  patientIdHandler: (e: any) => void
+  nameRef: HTMLInputElement | React.RefObject<HTMLInputElement>
+  ageRef: HTMLInputElement | React.RefObject<HTMLInputElement>
+  referedByRef: HTMLInputElement | React.RefObject<HTMLInputElement>
+  PIDRef: HTMLInputElement | React.RefObject<HTMLInputElement>
+  costRef: HTMLInputElement | React.RefObject<HTMLInputElement>
+  sexHandler: (event: React.ChangeEvent<{ value: unknown }>) => void
 }
 
 export const PatientsFields: React.FC<Props> = ({
-  name,
-  sex,
-  age,
-  cost,
-  referedBy,
-  nameHandler,
-  ageHandler,
-  referedByHandler,
-  costHandler,
-  handleChange,
-  PID,
-  patientIdHandler,
+  nameRef,
+  ageRef,
+  referedByRef,
+  costRef,
+  sexHandler,
+  PIDRef,
 }) => {
   const classes = useStyles()
 
@@ -67,7 +55,7 @@ export const PatientsFields: React.FC<Props> = ({
         <Input
           type="text"
           placeholder="eg. 28329"
-          onChange={patientIdHandler}
+          refInput={PIDRef}
           label="Patient's ID (optional)"
         />
       </Grid>
@@ -76,7 +64,7 @@ export const PatientsFields: React.FC<Props> = ({
         <Input
           type="text"
           placeholder="Patient's name"
-          onChange={nameHandler}
+          refInput={nameRef}
           label="Name"
         />
       </Grid>
@@ -86,17 +74,12 @@ export const PatientsFields: React.FC<Props> = ({
           type="text"
           label="Refered By"
           placeholder="Refered by"
-          onChange={referedByHandler}
+          refInput={referedByRef}
         />
       </Grid>
 
       <Grid item xs={6} sm={4} className={classes.grid}>
-        <Input
-          type="text"
-          label="Age"
-          placeholder="Age"
-          onChange={ageHandler}
-        />
+        <Input type="text" label="Age" placeholder="Age" refInput={ageRef} />
       </Grid>
 
       <Grid item xs={6} sm={4} className={classes.grid}>
@@ -105,8 +88,7 @@ export const PatientsFields: React.FC<Props> = ({
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={sex}
-            onChange={handleChange}
+            onChange={sexHandler}
           >
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
@@ -116,12 +98,7 @@ export const PatientsFields: React.FC<Props> = ({
       </Grid>
 
       <Grid item xs={6} sm={3} className={classes.grid}>
-        <Input
-          type="text"
-          label="Cost"
-          placeholder="Cost"
-          onChange={costHandler}
-        />
+        <Input type="text" label="Cost" placeholder="Cost" refInput={costRef} />
       </Grid>
     </Grid>
   )

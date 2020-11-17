@@ -51,6 +51,14 @@
     }
   }
 
+  &__logout {
+    padding: 4px 12px 0;
+    cursor: pointer;
+    & > svg {
+      font-size: 28px;
+    }
+  }
+
   // image
   &__image {
     & div {

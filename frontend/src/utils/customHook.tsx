@@ -24,6 +24,7 @@ export type TLogin = {
   email: string
   token: string
   name: string
+  isAdmin: boolean
 }
 export const login = (currentUser: TLogin) => {
   stateVar({

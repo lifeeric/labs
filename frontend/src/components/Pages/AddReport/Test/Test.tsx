@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
@@ -31,13 +31,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+type handler = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  id: number,
+  index: number
+) => void
+
 interface Props {
   resultData: ITest[]
-  changeResult: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    id: number,
-    index: number
-  ) => void
+  changeResult: handler
   filterResult: (id: number) => void
 }
 

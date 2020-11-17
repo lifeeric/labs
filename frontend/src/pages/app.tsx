@@ -6,6 +6,7 @@ import { Setting } from "../components/Pages/Setting/Setting"
 import Expenses from "../components/Pages/Expenses/Expenses"
 import { AddReport } from "../components/Pages/AddReport/AddReport"
 import { PatientData } from "../components/Pages/PatientData/PatientData"
+import { AddTemplate } from "../components/Pages/AddTemplate/AddTemplate"
 import { Dashboard } from "../components/Pages/Dashboard/"
 import { PrivateRoute } from "../components/UI/PrivateRoute/PrivateRoute"
 
@@ -21,6 +22,7 @@ export default () => {
       <PrivateRoute path="/app/setting" component={Setting} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
       <PrivateRoute path="/app/patientdata" component={PatientData} />
+      <PrivateRoute path="/app/template" component={AddTemplate} />
     </Router>
   )
 }

@@ -31,6 +31,7 @@ export default {
       token,
       email,
       _id: doesUserFound._id,
+      isAdmin: doesUserFound.isAdmin,
     };
   },
 };

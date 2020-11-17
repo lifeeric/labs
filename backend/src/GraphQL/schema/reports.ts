@@ -5,6 +5,7 @@ export default gql`
     getReports(id: ID!, patient_id: Int): [getReportUnion]!
     getProfit(id: ID!, date: String): [GetLabProfitUnion]!
     getTotalRecord(id: ID!): getTotalRecordUnion!
+    getTestTemplate(id: ID!): [generateTemplateUnion]!
   }
 
   union GetLabProfitUnion = GetLabProfit | Error
@@ -30,6 +31,7 @@ export default gql`
 
   extend type Mutation {
     addReport(add: addReport!): ReportUnion!
+    generateTemplate(add:TESTS): generateTemplateUnion!
   }
 
   union ReportUnion = getReportResult | Error
@@ -47,15 +49,30 @@ export default gql`
   }
 
   input TESTS {
-    id: Int!
+    id: Int
     name: String!
     test: [ATest]!
   }
 
   input ATest {
     test_name: String!
-    normalRanges: [String]!
-    unit: String!
+    normalRanges: [String]
+    unit: String
+    results: String!
+  }
+
+  union generateTemplateUnion = GenTemplateResult | Error
+
+  type GenTemplateResult {
+    id: Int!
+    name: String!
+    test: [SingleReport]!
+  }
+
+  type SingleReport {
+    test_name: String!
+    normalRanges: [String]
+    unit: String
     results: String!
   }
 

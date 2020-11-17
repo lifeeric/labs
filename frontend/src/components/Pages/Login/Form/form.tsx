@@ -36,12 +36,14 @@ export const Form: React.FC<Props> = ({
   const { register, handleSubmit, watch, reset } = useForm()
   useEffect(() => {
     if (data && data.login.__typename === "LoginUserResult") {
+      console.log(data.login, " =>>> LOGIN")
       login(data.login)
       setUser({
         _id: data.login._id,
         name: "",
         email: data.login.email,
         token: data.login.token,
+        isAdmin: data.login.isAdmin,
       })
       navigate("/app/dashboard")
     }
