@@ -37,7 +37,7 @@
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.10",
     "@types/request-promise": "^4.1.46",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "request-promise": "^4.2.6",
