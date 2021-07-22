@@ -61,7 +61,7 @@
     "react-to-print": "^2.11.0",
     "styled-components": "^5.1.1",
     "typeface-poppins": "^0.0.72",
-    "xlsx": "^0.16.8"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/node": "^14.6.2",
